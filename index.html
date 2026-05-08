@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINIMAX - Chuyên Tool Edit </title>
+    <!-- Import Font hiện đại -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Tool 1 Colors - Cyan/Blue */
+            --t1-primary: #00f2fe;
+            --t1-secondary: #4facfe;
+            --t1-glow: rgba(0, 242, 254, 0.6);
+
+            /* Tool 2 Colors - Violet/Pink */
+            --t2-primary: #a18cd1;
+            --t2-secondary: #fbc2eb;
+            --t2-glow: rgba(161, 140, 209, 0.6);
+
+            /* Brand Colors */
+            --brand-gradient: linear-gradient(135deg, #00f2fe 0%, #fbc2eb 100%);
+
+            /* Base Colors */
+            --bg-color: #03050a;
+            --card-bg: rgba(13, 17, 28, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --io-bg: rgba(6, 9, 18, 0.6);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Lưới nền công nghệ mượt hơn */
+        .background-grid {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -3;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Ánh sáng mờ chuyển động phía sau (Blobs) */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            z-index: -2;
+            animation: floatBlob 15s infinite alternate ease-in-out;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: rgba(0, 242, 254, 0.15); }
+        .blob-2 { top: 20%; right: -10%; width: 600px; height: 600px; background: rgba(161, 140, 209, 0.15); animation-delay: -5s;}
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* --- Navbar / Brand NINI --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(3, 5, 10, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .brand:hover { transform: scale(1.05); }
+
+        .brand-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+        }
+
+        .brand-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 150px 20px 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+
+        .tagline::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--t1-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--t1-primary);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--t1-primary); }
+            50% { opacity: 0.3; box-shadow: 0 0 2px var(--t1-primary); }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            background: linear-gradient(
+                to right, 
+                #ffffff 20%, 
+                var(--t1-primary) 40%, 
+                var(--t2-secondary) 60%, 
+                #ffffff 80%
+            );
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        /* --- Container & Cards --- */
+        .container {
+            max-width: 100%; 
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: flex;
+            flex-direction: column; 
+            gap: 50px; 
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 24px;
+            padding: 40px; 
+            width: 100%;
+            max-width: 1100px; 
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Tool 1 Hover */
+        .card.card-t1:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1), inset 0 0 20px rgba(0, 242, 254, 0.02);
+        }
+        .card.card-t1:hover::before { opacity: 1; background: linear-gradient(90deg, transparent, var(--t1-primary), transparent); }
+        .card.card-t1 .card-title span { color: var(--t1-primary); text-shadow: 0 0 20px var(--t1-glow); }
+        .card.card-t1 .btn { background: linear-gradient(135deg, var(--t1-primary), var(--t1-secondary)); color: #011627; }
+
+        /* Tool 2 Hover */
+        .card.card-t2:hover {
+            transform: translateY(-8px);
+            border-color: rgba(161, 140, 209, 0.3);
+            box-shadow: 0 30px 60px rgba(161, 140, 209, 0.1), inset 0 0 20px rgba(161, 140, 209, 0.02);
+        }
+        .card.card-t2:hover::before { opacity: 1; background: linear-gradient(90deg, transparent, var(--t2-secondary), transparent); }
+        .card.card-t2 .card-title span { color: var(--t2-secondary); text-shadow: 0 0 20px var(--t2-glow); }
+        .card.card-t2 .btn { background: linear-gradient(135deg, var(--t2-primary), var(--t2-secondary)); color: #1a0b2e; }
+
+        .badge {
+            position: absolute;
+            top: 0; right: 30px;
+            background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+            color: white;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 0 0 10px 10px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(255, 8, 68, 0.2);
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        /* --- Pricing & Bonus Box (MỚI THÊM) --- */
+        .price-container {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 30px;
+            margin-top: -10px;
+        }
+        
+        .price {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .card.card-t1 .price { color: var(--t1-primary); text-shadow: 0 0 15px var(--t1-glow);}
+        .card.card-t2 .price { color: var(--t2-secondary); text-shadow: 0 0 15px var(--t2-glow);}
+        
+        .duration {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            font-weight: 600;
+            text-transform: lowercase;
+        }
+
+        .bonus-box {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px dashed rgba(251, 191, 36, 0.4);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .bonus-box:hover {
+            background: rgba(251, 191, 36, 0.12);
+            border-style: solid;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.1);
+        }
+
+        .bonus-icon {
+            font-size: 2rem;
+            line-height: 1;
+            filter: drop-shadow(0 0 10px rgba(251,191,36,0.5));
+        }
+
+        .bonus-content h4 {
+            color: #fbbf24;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bonus-content p {
+            color: #f8fafc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .bonus-content strong {
+            color: #fff;
+            text-decoration: underline;
+            text-decoration-color: #fbbf24;
+            text-underline-offset: 3px;
+        }
+
+        /* --- Video Demo Section --- */
+        .video-demo-box {
+            background-color: var(--io-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px; 
+            margin-bottom: 30px;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .demo-title {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .demo-title::before, .demo-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            margin: 0 15px;
+        }
+
+        .video-label {
+            font-size: 0.85rem; 
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.6);
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(5px);
+            z-index: 5;
+        }
+
+        .video-label.input { color: #facc15; border: 1px solid rgba(250, 204, 21, 0.2); }
+        .video-label.output { color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+
+        /* NÂNG CẤP CSS CHO VIDEO */
+        .custom-video-player {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000; 
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .custom-video-player:hover {
+            transform: scale(1.02);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.8);
+        }
+
+        .custom-video-player video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain; 
+            background: #000;
+        }
+
+        /* Nút Play hiển thị trên Video (Overlay) */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+            pointer-events: auto; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .play-overlay svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+            margin-left: 4px;
+            transition: transform 0.2s;
+        }
+
+        .custom-video-player:hover .play-overlay {
+            background: var(--t1-primary);
+            border-color: var(--t1-primary);
+            box-shadow: 0 0 20px var(--t1-glow);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .custom-video-player:hover .play-overlay svg {
+            fill: #000;
+        }
+
+        .card.card-t2 .custom-video-player:hover .play-overlay {
+            background: var(--t2-secondary);
+            border-color: var(--t2-secondary);
+            box-shadow: 0 0 20px var(--t2-glow);
+        }
+
+        /* Ẩn nút play khi video đang chạy */
+        .custom-video-player.is-playing .play-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -50%) scale(0.8);
+            pointer-events: none; 
+        }
+
+        /* Layout Reup Pro */
+        .video-case {
+            display: flex;
+            align-items: center;
+            gap: 20px; 
+            margin-bottom: 30px;
+        }
+        .video-case:last-child { margin-bottom: 0; }
+        
+        .video-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .video-case .video-wrapper-goc { flex: 1; }
+        .video-case .outputs-wrapper {
+            flex: 2;
+            display: flex;
+            gap: 20px; 
+        }
+
+        .video-case .custom-video-player { aspect-ratio: 9/16; }
+        .multi-video-output .custom-video-player { aspect-ratio: 9/16; }
+        .full-width .custom-video-player { aspect-ratio: 16/9; max-width: 800px; margin: 0 auto; } 
+
+        .divider {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            margin: 35px 0;
+        }
+
+        /* Layout AutoClip */
+        .video-compare-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .full-width { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .multi-video-output {
+            display: flex;
+            gap: 25px; 
+            justify-content: center;
+            width: 100%;
+            max-width: 900px; 
+        }
+        .multi-video-output .video-wrapper { flex: 1; }
+
+        .arrow-icon {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            background: rgba(255,255,255,0.05);
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+        .arrow-icon.down { transform: rotate(90deg); margin: 10px 0; }
+
+        /* --- Features List --- */
+        .features-list {
+            list-style: none;
+            margin-bottom: 35px;
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 30px;
+        }
+
+        .features-list li {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .features-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--t1-primary);
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px var(--t1-glow);
+        }
+
+        .card.card-t2 .features-list li::before { color: var(--t2-secondary); text-shadow: 0 0 10px var(--t2-glow);}
+
+        .highlight { color: #fff; font-weight: 600; }
+        .exclusive { 
+            color: #fbbf24; 
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+        }
+
+        /* --- Nút bấm (CTA) --- */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px; 
+            margin: auto auto 0; 
+            padding: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* --- Nút Group Zalo Nổi --- */
+        .zalo-group-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0068ff, #00aaff);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+            box-shadow: 0 10px 30px rgba(0, 104, 255, 0.3);
+            animation: pulse-zalo 2s infinite;
+        }
+
+        @keyframes pulse-zalo {
+            0% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 104, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0); }
+        }
+
+        .zalo-group-btn:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #005ce6, #0099e6);
+        }
+
+        .zalo-icon {
+            font-size: 1rem;
+            font-weight: 800;
+            background: white;
+            color: #0068ff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 60px 20px 80px;
+            color: var(--text-muted);
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .footer-brand .brand-name { font-size: 1.4rem; }
+        .footer-logo { font-weight: 500; font-size: 0.9rem; margin-bottom: 5px; color: #94a3b8;}
+
+        /* --- Entrance Animations --- */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            h1 { font-size: 2.8rem; }
+            .card { padding: 30px 20px; } 
+            
+            .features-list { grid-template-columns: 1fr; }
+            
+            .video-case { flex-direction: column; }
+            .arrow-icon { transform: rotate(90deg); margin: 15px 0;}
+            .video-case .outputs-wrapper { width: 100%; }
+            .video-case .video-wrapper-goc { width: 60%; } 
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .navbar { justify-content: flex-start; padding: 0 20px; }
+            .price { font-size: 2.2rem; }
+            
+            .multi-video-output { flex-direction: column; align-items: center;}
+            .multi-video-output .video-wrapper { width: 90%; margin-bottom: 15px;}
+            
+            .video-case .video-wrapper-goc { width: 90%; }
+            .video-case .outputs-wrapper { flex-direction: column; align-items: center; gap: 15px; width: 100%; }
+            .video-case .outputs-wrapper .video-wrapper { width: 90%; }
+            
+            .bonus-box { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+            
+            .zalo-group-btn {
+                bottom: 20px; right: 20px;
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background Grid & Blobs -->
+    <div class="background-grid"></div>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav class="navbar">
+            <a href="#" class="brand">
+                <div class="brand-icon" style="background: transparent; border: none; box-shadow: none;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="nini-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#fbc2eb" />
+                            </linearGradient>
+                            <linearGradient id="nini-gradient-2" x1="100%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#a18cd1" />
+                            </linearGradient>
+                            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.4"/>
+                            </filter>
+                        </defs>
+                        <path d="M11.5 1.5C11.5 1.5 12.5 8 18.5 8.5C12.5 9 11.5 15.5 11.5 15.5C11.5 15.5 10.5 9 4.5 8.5C10.5 8 11.5 1.5 11.5 1.5Z" fill="url(#nini-gradient)"/>
+                        <path d="M9.5 10C9.5 9.1537 10.4258 8.62744 11.1508 9.0536L17.1508 12.583C17.8512 12.9949 17.8512 14.0051 17.1508 14.417L11.1508 17.9464C10.4258 18.3726 9.5 17.8463 9.5 17V10Z" fill="#ffffff" filter="url(#shadow)"/>
+                        <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z" fill="url(#nini-gradient-2)"/>
+                    </svg>
+                </div>
+                <span class="brand-name">NINI STORE</span>
+            </a>
+    </nav>
+    <header class="fade-in-up">
+        <span class="tagline">Trợ Thủ Đắc Lực Cho Dân Sáng Tạo</span>
+        <h1>Làm Video Chưa Bao Giờ<br>Dễ Đến Thế</h1>
+        <p class="subtitle">Quên đi hàng giờ ngồi cắt ghép mệt mỏi! Để NINI lo trọn gói khâu làm video từ A-Z. Việc của bạn chỉ là rảnh tay lên ý tưởng, vít scale và x2 doanh thu mỗi tháng.</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- TOOL 1: REUP-VIDEO-PRO -->
+        <div class="card card-t1 fade-in-up delay-1">
+            <h2 class="card-title">🌐 REUP-PRO <span>AI</span></h2>
+            <p class="card-subtitle">Biến 1 video thành cỗ máy in tiền đa quốc gia</p>
+            <div class="video-demo-box">
+                <p class="demo-title">Nhân Bản Đa Ngôn Ngữ</p>
+                
+                <!-- Ví dụ 1 -->
+                <div class="video-case">
+                    <div class="video-wrapper video-wrapper-goc">
+                        <span class="video-label input">📥 Gốc (Trung)</span>
+                        <div class="custom-video-player">
+                            <video controls playsinline preload="metadata">
+                                <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/1_comcjw.mp4#t=0.501" type="video/mp4">
+                            </video>
+                            <div class="play-overlay">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow-icon">➔</div>
+                    
+                    <div class="outputs-wrapper">
+                        <div class="video-wrapper">
+                            <span class="video-label output">📤 Việt</span>
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260151/1-viet_mz9z2f.mp4#t=0.501" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-wrapper">
+                            <span class="video-label output">📤 Nhật</span>
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260045/1-nhat_kheyih.mp4#t=0.501" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Ví dụ 2 -->
+                <div class="video-case">
+                    <div class="video-wrapper video-wrapper-goc">
+                        <span class="video-label input">📥 Gốc (Trung)</span>
+                        <div class="custom-video-player">
+                            <video controls playsinline preload="metadata">
+                                <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260189/2_hyu3rt.mp4#t=2.301" type="video/mp4">
+                            </video>
+                            <div class="play-overlay">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow-icon">➔</div>
+                    
+                    <div class="outputs-wrapper">
+                        <div class="video-wrapper">
+                            <span class="video-label output">📤 Việt</span>
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260214/2-Anh_vyjeer.mp4#t=2.301" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-wrapper">
+                            <span class="video-label output">📤 Anh</span>
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260214/2-Anh_vyjeer.mp4#t=2.301" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="features-list">
+                <li><span class="highlight">Tự động 100%:</span> Chỉ cần tải video lên, hệ thống lo từ A-Z.</li>
+                <li><span class="highlight">Xử lý siêu chính xác:</span> Lấy voice và trích xuất phụ đề bằng AI OCR.</li>
+                <li><span class="highlight">Kho AI Voice:</span> Giọng đọc bản địa tự nhiên, phong phú mọi quốc gia.</li>
+                <li><span class="highlight">Tối ưu công nghiệp:</span> Cho Affiliates, người xây kênh đa nền tảng.</li>
+                <li><span class="exclusive">Độc quyền:</span> Chỉ che khi có sub, trả lại hình ảnh gốc khi sub hết.</li>
+                <li><span class="highlight">Chất lượng cao:</span> Xuất File 1080p, 4K sắc nét và giữ nguyên chất lượng.</li>
+            </ul>
+
+            <div class="bonus-box">
+                <span class="bonus-icon">🚀</span>
+                <div class="bonus-content">
+                    <h4>Đặc quyền Full-Option cho Member</h4>
+                    <p>Sở hữu bí kíp <strong>vận hành kênh từ A-Z</strong>: Quy trình Build acc, mẹo Bật kiếm tiền và tặng kèm <strong>Full bộ Tool tải video hàng loạt</strong> đa nền tảng.</p>
+                </div>
+            </div>
+            <a href="https://zalo.me/0876762457" target="_blank" class="btn">🚀 Liên Hệ Mua REUP-PRO</a>
+        </div>
+
+        <!-- TOOL 2: AUTOCLIP AI -->
+        <div class="card card-t2 fade-in-up delay-2">
+            <div class="badge">🔥 Bán Chạy</div>
+            <h2 class="card-title">⚡ AutoClip <span>AI</span></h2>
+            <p class="card-subtitle">Xưởng sản xuất video ngắn công nghiệp tự động</p>
+            <div class="video-demo-box">
+                <p class="demo-title">Cắt Auto 1 Video Dài Thành Shorts</p>
+                
+                <div class="video-compare-vertical">
+                    <!-- Khung Video Input -->
+                    <div class="full-width">
+                        <span class="video-label input" style="margin-bottom: 8px;">📥 GỐC: Podcast / Vlog</span>
+                        <div class="custom-video-player">
+                            <video controls playsinline preload="metadata">
+                                <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260266/ngang_lxpuwl.mp4#t=0.001" type="video/mp4">
+                            </video>
+                            <div class="play-overlay">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow-icon down">➔</div>
+                    
+                    <span class="video-label output" style="margin-bottom: 15px;">📤 SAU: Hàng loạt Video 9:16</span>
+                    
+                    <!-- Khung Video Output -->
+                    <div class="multi-video-output">
+                        <div class="video-wrapper">
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260293/ngang-1_iimyrt.mp4#t=0.001" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-wrapper">
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260318/ngang-2_huggvq.mp4#t=0.001" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-wrapper">
+                            <div class="custom-video-player">
+                                <video controls playsinline preload="metadata">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260339/ngang-3_vbdocp.mp4#t=0.001" type="video/mp4">
+                                </video>
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="features-list">
+                <li><span class="highlight">Highlight Thông Minh:</span> Bắt trọn những đoạn có tỷ lệ Viral cao nhất.</li>
+                <li><span class="highlight">Tracking Khuôn Mặt:</span> Giữ chủ thể luôn ở trung tâm khung hình 9:16.</li>
+                <li><span class="highlight">Phụ đề Động:</span> Chạy chữ phong cách Alex Hormozi cực cuốn hút.</li>
+                <li><span class="highlight">Tối ưu công nghiệp:</span> Giải pháp số 1 để xây kênh TikTok Beta: Cày view ngoại - Nhận RPM cao - Thu nhập USD.</li>
+            </ul>
+
+            <div class="bonus-box">
+                <span class="bonus-icon">🔥</span>
+                <div class="bonus-content">
+                    <h4>Hệ sinh thái Hỗ trợ Thực chiến</h4>
+                    <p>Hỗ trợ <strong>TikTok Beta chuyên sâu</strong> | Cung cấp nguồn Acc & Tool bổ trợ | Cập nhật kho <strong>Key ngách xu hướng</strong> & trọn bộ <strong>TUT mỏ vàng</strong>.</p>
+                </div>
+            </div>
+
+          
+
+            <a href="https://zalo.me/0876762457" target="_blank" class="btn">⚡ Mở Khóa AutoClip AI</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <!-- Brand -->
+        <div class="footer-brand">
+           <div class="footer-brand">
+                <div class="brand-icon" style="background: transparent; border: none; box-shadow: none; width: 24px; height: 24px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="nini-gradient-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#fbc2eb" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M11.5 1.5C11.5 1.5 12.5 8 18.5 8.5C12.5 9 11.5 15.5 11.5 15.5C11.5 15.5 10.5 9 4.5 8.5C10.5 8 11.5 1.5 11.5 1.5Z" fill="url(#nini-gradient-footer)"/>
+                        <path d="M9.5 10C9.5 9.1537 10.4258 8.62744 11.1508 9.0536L17.1508 12.583C17.8512 12.9949 17.8512 14.0051 17.1508 14.417L11.1508 17.9464C10.4258 18.3726 9.5 17.8463 9.5 17V10Z" fill="#ffffff"/>
+                        <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z" fill="url(#nini-gradient-footer)"/>
+                    </svg>
+                </div>
+                <span class="brand-name">NINI STORE</span>
+            </div>
+        </div>
+        
+        <!-- Slogan kết nối 2 Tool -->
+        <div class="footer-logo" style="color: var(--t1-primary); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Kiến Tạo Kỷ Nguyên Video Tự Động</div>
+        
+        <!-- Lời cam kết / Tóm tắt giá trị -->
+        <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto 25px; color: var(--text-muted); line-height: 1.6;">
+            Giải pháp hoàn hảo giúp bạn <strong style="color: #fff;">phủ sóng toàn cầu (REUP-PRO)</strong> và <strong style="color: #fff;">phủ sóng đa kênh (AutoClip)</strong>. Dẹp bỏ rào cản kỹ thuật, rảnh tay vít scale và x2 doanh thu mỗi tháng!
+        </p>
+
+        <!-- Khối liên hệ nổi bật hơn -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 40px; margin-bottom: 25px; font-size: 1rem; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; display: inline-flex; border: 1px solid rgba(255,255,255,0.05);">
+            <span>Đồng hành 1-1: <strong style="color: var(--t2-secondary);">24/7</strong></span>
+            <span>Hotline / Zalo: <strong style="color: var(--t1-primary); font-size: 1.1rem;">0876.762.457</strong></span>
+        </div>
+
+        <!-- Dòng kẻ phân cách mỏng -->
+        <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); max-width: 400px; margin: 0 auto 20px;">
+
+        <!-- Bản quyền -->
+        <p style="font-size: 0.85rem; color: #64748b;">© 2026 Bản quyền thuộc về NINI AI. Mọi quyền được bảo lưu.</p>
+    </footer>
+    
+    <a href="https://zalo.me/g/azmjsw001" target="_blank" class="zalo-group-btn">
+        <span class="zalo-icon">Z</span> Group Hỗ Trợ Xây Kênh (Free)
+    </a>
+
+    <!-- JAVASCRIPT ĐÃ SỬA LỖI CLICK -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const playerContainers = document.querySelectorAll('.custom-video-player');
+            const allVideos = document.querySelectorAll('video');
+
+            playerContainers.forEach(container => {
+                const video = container.querySelector('video');
+                const overlay = container.querySelector('.play-overlay');
+
+                // CHỈ BẮT SỰ KIỆN CLICK Ở NÚT PLAY OVERLAY
+                overlay.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Ngăn sự kiện click bị "double"
+                    if (video.paused) {
+                        video.play();
+                    }
+                });
+
+                // TỰ ĐỘNG XỬ LÝ KHI VIDEO BẮT ĐẦU CHẠY
+                video.addEventListener('play', () => {
+                    container.classList.add('is-playing');
+                    
+                    // Tự động dừng các video khác
+                    allVideos.forEach(v => {
+                        if (v !== video && !v.paused) {
+                            v.pause();
+                        }
+                    });
+                });
+
+                video.addEventListener('pause', () => {
+                    container.classList.remove('is-playing');
+                });
+                
+                video.addEventListener('ended', () => {
+                    container.classList.remove('is-playing');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
