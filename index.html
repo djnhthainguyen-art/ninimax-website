@@ -253,7 +253,8 @@
         .container {
             max-width: 100%; 
             margin: 0 auto;
-            padding: 0 20px 60px;
+            /*padding: 0 20px 60px;*/
+            padding: 0 20px 15px;
             display: flex;
             flex-direction: column; 
             gap: 50px; 
@@ -715,7 +716,7 @@
         }
 
         /* --- Footer --- */
-        footer {
+      /*  footer {
             text-align: center;
             padding: 60px 20px 80px;
             color: var(--text-muted);
@@ -725,7 +726,18 @@
             position: relative;
             z-index: 10;
         }
-        
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 15px 10px 30px; /* ĐÃ SỬA: Giảm padding top từ 60px xuống 30px */
+            color: var(--text-muted);
+            margin-top: 10px;        /* ĐÃ SỬA: Giảm margin-top từ 60px xuống 20px */
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            position: relative;
+            z-index: 10;
+        }
+        */
         .footer-brand {
             display: flex;
             align-items: center;
@@ -1073,9 +1085,8 @@
     </main>
 
     <footer>
-        <!-- Brand -->
-        <div class="footer-brand">
-           <div class="footer-brand">
+            <!-- Brand -->
+            <div class="footer-brand">
                 <div class="brand-icon" style="background: transparent; border: none; box-shadow: none; width: 24px; height: 24px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -1091,29 +1102,28 @@
                 </div>
                 <span class="brand-name">NINIMAX</span>
             </div>
-        </div>
-        
-        <!-- Slogan kết nối 2 Tool -->
-        <div class="footer-logo" style="color: var(--t1-primary); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Kiến Tạo Kỷ Nguyên Video Tự Động</div>
-        
-        <!-- Lời cam kết / Tóm tắt giá trị -->
-        <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto 25px; color: var(--text-muted); line-height: 1.6;">
-            Giải pháp hoàn hảo giúp bạn <strong style="color: #fff;">phủ sóng toàn cầu (REUP-PRO)</strong> và <strong style="color: #fff;">phủ sóng đa kênh (AutoClip)</strong>. Dẹp bỏ rào cản kỹ thuật, rảnh tay vít scale và x2 doanh thu mỗi tháng!
-        </p>
+            
+            <!-- Slogan kết nối 2 Tool -->
+            <div class="footer-logo" style="color: var(--t1-primary); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Kiến Tạo Kỷ Nguyên Video Tự Động</div>
+            
+            <!-- Lời cam kết / Tóm tắt giá trị -->
+            <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto 25px; color: var(--text-muted); line-height: 1.6;">
+                Giải pháp hoàn hảo giúp bạn <strong style="color: #fff;">phủ sóng toàn cầu (REUP-PRO)</strong> và <strong style="color: #fff;">phủ sóng đa kênh (AutoClip)</strong>. Dẹp bỏ rào cản kỹ thuật, rảnh tay vít scale và x2 doanh thu mỗi tháng!
+            </p>
 
-        <!-- Khối liên hệ nổi bật hơn -->
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 40px; margin-bottom: 25px; font-size: 1rem; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; display: inline-flex; border: 1px solid rgba(255,255,255,0.05);">
-            <span>Đồng hành 1-1: <strong style="color: var(--t2-secondary);">24/7</strong></span>
-            <span>Hotline / Zalo: <strong style="color: var(--t1-primary); font-size: 1.1rem;">0876.762.457</strong></span>
-        </div>
+            <!-- Khối liên hệ nổi bật hơn -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 40px; margin-bottom: 25px; font-size: 1rem; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; display: inline-flex; border: 1px solid rgba(255,255,255,0.05);">
+                <span>Đồng hành 1-1: <strong style="color: var(--t2-secondary);">24/7</strong></span>
+                <span>Hotline / Zalo: <strong style="color: var(--t1-primary); font-size: 1.1rem;">0876.762.457</strong></span>
+            </div>
 
-        <!-- Dòng kẻ phân cách mỏng -->
-        <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); max-width: 400px; margin: 0 auto 20px;">
+            <!-- Dòng kẻ phân cách mỏng -->
+            <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); max-width: 400px; margin: 0 auto 20px;">
 
-        <!-- Bản quyền -->
-        <p style="font-size: 0.85rem; color: #64748b;">
-          © 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa
-        </p>
+            <!-- Bản quyền -->
+            <p style="font-size: 0.85rem; color: #64748b;">
+              © 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa
+            </p>
     </footer>
     
     <a href="https://zalo.me/g/azmjsw001" target="_blank" class="zalo-group-btn">
