@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="NINIMAX - Trợ Thủ Đắc Lực Cho Dân Sáng Tạo">
+    <meta property="og:description" content="Làm video tự động đa ngôn ngữ, cắt video short siêu tốc. Rảnh tay x2 doanh thu!">
+    <meta property="og:image" content="https://res.cloudinary.com/dmrjsn31y/image/upload/v1778287847/logo_nox4ob.png">
+    <meta property="og:url" content="https://www.ninimax.com">
+
     <title>NINIMAX - Chuyên Tool Edit </title>
     <!-- Import Font hiện đại -->
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,6 +37,11 @@
             --io-bg: rgba(6, 9, 18, 0.6);
             --border-color: rgba(255, 255, 255, 0.06);
             --border-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px; /* Tránh bị thanh navbar che mất tiêu đề khi scroll */
         }
 
         * {
@@ -198,6 +209,46 @@
             line-height: 1.7;
         }
 
+        /* --- Nút Navigate --- */
+        .quick-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .nav-btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.nav-t1:hover {
+            border-color: var(--t1-primary);
+            color: var(--t1-primary);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
+        }
+
+        .nav-btn.nav-t2:hover {
+            border-color: var(--t2-secondary);
+            color: var(--t2-secondary);
+            box-shadow: 0 5px 15px rgba(161, 140, 209, 0.2);
+        }
+
         /* --- Container & Cards --- */
         .container {
             max-width: 100%; 
@@ -289,7 +340,7 @@
             font-weight: 400;
         }
 
-        /* --- Pricing & Bonus Box (MỚI THÊM) --- */
+        /* --- Pricing & Bonus Box --- */
         .price-container {
             display: flex;
             align-items: baseline;
@@ -410,7 +461,6 @@
         .video-label.input { color: #facc15; border: 1px solid rgba(250, 204, 21, 0.2); }
         .video-label.output { color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
 
-        /* NÂNG CẤP CSS CHO VIDEO */
         .custom-video-player {
             position: relative;
             width: 100%;
@@ -436,7 +486,6 @@
             background: #000;
         }
 
-        /* Nút Play hiển thị trên Video (Overlay) */
         .play-overlay {
             position: absolute;
             top: 50%;
@@ -484,7 +533,6 @@
             box-shadow: 0 0 20px var(--t2-glow);
         }
 
-        /* Ẩn nút play khi video đang chạy */
         .custom-video-player.is-playing .play-overlay {
             opacity: 0;
             visibility: hidden;
@@ -701,13 +749,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Responsive --- */
+        /* --- Responsive TỐI ƯU --- */
         @media (max-width: 900px) {
             h1 { font-size: 2.8rem; }
             .card { padding: 30px 20px; } 
-            
             .features-list { grid-template-columns: 1fr; }
-            
             .video-case { flex-direction: column; }
             .arrow-icon { transform: rotate(90deg); margin: 15px 0;}
             .video-case .outputs-wrapper { width: 100%; }
@@ -715,24 +761,68 @@
         }
         
         @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .navbar { justify-content: flex-start; padding: 0 20px; }
-            .price { font-size: 2.2rem; }
+            /* Giảm bớt padding thừa */
+            header { padding: 100px 15px 30px; }
+            .container { gap: 25px; padding-bottom: 30px; }
+            .card { padding: 20px 15px; } 
+            .video-demo-box { padding: 15px; margin-bottom: 20px; }
             
-            .multi-video-output { flex-direction: column; align-items: center;}
-            .multi-video-output .video-wrapper { width: 90%; margin-bottom: 15px;}
+            /* Text nhỏ gọn lại */
+            h1 { font-size: 2rem; margin-bottom: 15px; }
+            .subtitle { font-size: 0.95rem; }
+            .card-title { font-size: 1.6rem; }
+            .price { font-size: 2rem; }
+            .navbar { justify-content: flex-start; padding: 0 15px; height: 60px; }
             
-            .video-case .video-wrapper-goc { width: 90%; }
-            .video-case .outputs-wrapper { flex-direction: column; align-items: center; gap: 15px; width: 100%; }
-            .video-case .outputs-wrapper .video-wrapper { width: 90%; }
+            /* Điều chỉnh Nút Quick Nav Mobile */
+            .quick-nav { flex-direction: row; gap: 10px; margin-top: 25px; }
+            .nav-btn { padding: 8px 12px; font-size: 0.85rem; width: 50%; justify-content: center; }
+
+            /* 1. TỐI ƯU VIDEO AUTOCLIP (CUỘN NGANG) */
+            .multi-video-output { 
+                flex-direction: row; /* Dàn hàng ngang */
+                overflow-x: auto;    /* Vuốt ngang */
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: 12px;
+                padding-bottom: 10px; /* Nhường chỗ cho thanh cuộn */
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            .multi-video-output::-webkit-scrollbar { height: 6px; }
+            .multi-video-output::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
             
-            .bonus-box { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+            .multi-video-output .video-wrapper { 
+                width: 45%; /* Sẽ hiển thị khoảng 2 video rưỡi trên màn hình */
+                min-width: 140px; 
+                margin-bottom: 0;
+                flex: 0 0 auto;
+                scroll-snap-align: start;
+            }
+            
+            /* 2. TỐI ƯU VIDEO REUP PRO (CHIA 2 CỘT) */
+            .video-case .video-wrapper-goc { width: 100%; max-width: 250px; }
+            .video-case .outputs-wrapper { 
+                flex-direction: row; /* Hiển thị 2 video cạnh nhau */
+                justify-content: center;
+                gap: 15px; 
+                width: 100%; 
+            }
+            .video-case .outputs-wrapper .video-wrapper { width: 48%; }
+            
+            /* Các UI khác */
+            .bonus-box { flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 15px; }
+            .features-list li { font-size: 0.9rem; margin-bottom: 10px; }
+            .divider { margin: 20px 0; }
+            
+            .arrow-icon { width: 32px; height: 32px; font-size: 1rem; margin: 5px 0; }
             
             .zalo-group-btn {
-                bottom: 20px; right: 20px;
-                padding: 10px 18px;
-                font-size: 0.85rem;
+                bottom: 15px; right: 15px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
             }
+            .zalo-icon { width: 20px; height: 20px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -765,19 +855,27 @@
                         <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z" fill="url(#nini-gradient-2)"/>
                     </svg>
                 </div>
-                <span class="brand-name">NINI STORE</span>
+                <span class="brand-name">NINIMAX</span>
             </a>
     </nav>
     <header class="fade-in-up">
         <span class="tagline">Trợ Thủ Đắc Lực Cho Dân Sáng Tạo</span>
         <h1>Làm Video Chưa Bao Giờ<br>Dễ Đến Thế</h1>
         <p class="subtitle">Quên đi hàng giờ ngồi cắt ghép mệt mỏi! Để NINI lo trọn gói khâu làm video từ A-Z. Việc của bạn chỉ là rảnh tay lên ý tưởng, vít scale và x2 doanh thu mỗi tháng.</p>
+        
+        <!-- THÊM NÚT ĐIỀU HƯỚNG TẠI ĐÂY -->
+        <div class="quick-nav fade-in-up delay-1">
+            <a href="#tool-reup" class="nav-btn nav-t1">🌐 Mục REUP-PRO</a>
+            <a href="#tool-autoclip" class="nav-btn nav-t2">⚡ Mục AutoClip</a>
+        </div>
     </header>
 
     <main class="container">
         
         <!-- TOOL 1: REUP-VIDEO-PRO -->
-        <div class="card card-t1 fade-in-up delay-1">
+        <!-- ĐÃ GẮN ID 'tool-reup' -->
+        <div class="card card-t1 fade-in-up delay-1" id="tool-reup">
+            <div class="badge" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);">💎 Độc Quyền</div>
             <h2 class="card-title">🌐 REUP-PRO <span>AI</span></h2>
             <p class="card-subtitle">Biến 1 video thành cỗ máy in tiền đa quốc gia</p>
             <div class="video-demo-box">
@@ -848,7 +946,7 @@
                             <span class="video-label output">📤 Việt</span>
                             <div class="custom-video-player">
                                 <video controls playsinline preload="metadata">
-                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260214/2-Anh_vyjeer.mp4#t=2.301" type="video/mp4">
+                                    <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260240/2-viet_csopdr.mp4#t=2.301" type="video/mp4">
                                 </video>
                                 <div class="play-overlay">
                                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -890,7 +988,8 @@
         </div>
 
         <!-- TOOL 2: AUTOCLIP AI -->
-        <div class="card card-t2 fade-in-up delay-2">
+        <!-- ĐÃ GẮN ID 'tool-autoclip' -->
+        <div class="card card-t2 fade-in-up delay-2" id="tool-autoclip">
             <div class="badge">🔥 Bán Chạy</div>
             <h2 class="card-title">⚡ AutoClip <span>AI</span></h2>
             <p class="card-subtitle">Xưởng sản xuất video ngắn công nghiệp tự động</p>
@@ -990,7 +1089,7 @@
                         <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z" fill="url(#nini-gradient-footer)"/>
                     </svg>
                 </div>
-                <span class="brand-name">NINI STORE</span>
+                <span class="brand-name">NINIMAX</span>
             </div>
         </div>
         
@@ -1012,7 +1111,9 @@
         <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); max-width: 400px; margin: 0 auto 20px;">
 
         <!-- Bản quyền -->
-        <p style="font-size: 0.85rem; color: #64748b;">© 2026 Bản quyền thuộc về NINI AI. Mọi quyền được bảo lưu.</p>
+        <p style="font-size: 0.85rem; color: #64748b;">
+          © 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa
+        </p>
     </footer>
     
     <a href="https://zalo.me/g/azmjsw001" target="_blank" class="zalo-group-btn">
