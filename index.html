@@ -113,7 +113,8 @@
             height: 70px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between; /* Giãn cách 2 bên */
+            padding: 0 5%; /* Căn lề */
             background: rgba(3, 5, 10, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -150,6 +151,31 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
+
+        /* --- Nút YouTube trên Navbar --- */
+        .nav-social-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 50px;
+            background: rgba(255, 0, 0, 0.08);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            color: #ff4d4d;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .nav-social-btn:hover {
+            background: #ff0000;
+            color: #fff;
+            border-color: #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        .nav-social-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* --- Header --- */
         header {
@@ -611,6 +637,21 @@
         .zalo-group-btn:hover { transform: translateY(-5px); background: linear-gradient(135deg, #005ce6, #0099e6); }
         .zalo-icon { font-size: 1rem; font-weight: 800; background: white; color: #0068ff; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
 
+        /* --- Style cho nút YouTube dưới Footer --- */
+        .yt-footer-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: rgba(255, 0, 0, 0.1); color: #ff4d4d;
+            border: 1px solid rgba(255, 0, 0, 0.3); padding: 12px 24px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            font-size: 0.95rem; transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.1); margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+        .yt-footer-btn:hover {
+            background: #ff0000; color: #fff; border-color: #ff0000;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4); transform: translateY(-3px);
+        }
+
         /* --- Footer --- */
         footer { text-align: center; padding: 15px 10px 30px; color: var(--text-muted); margin-top: 10px; border-top: 1px solid var(--border-color); background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); position: relative; z-index: 10; }
         .footer-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
@@ -639,9 +680,15 @@
             .subtitle { font-size: 0.95rem; }
             .card-title { font-size: 1.6rem; }
             .price { font-size: 2rem; }
-            .navbar { justify-content: flex-start; padding: 0 15px; height: 60px; }
-            .quick-nav { flex-direction: row; gap: 10px; margin-top: 25px; }
-            .nav-btn { padding: 8px 12px; font-size: 0.85rem; width: 50%; justify-content: center; }
+            
+            /* Navbar Mobile: Trái Logo - Phải Icon YT Bo tròn */
+            .navbar { justify-content: space-between; padding: 0 20px; height: 60px; }
+            .nav-social-btn .yt-text { display: none; } /* Ẩn chữ YouTube trên mobile cho gọn */
+            .nav-social-btn { padding: 8px; border-radius: 50%; }
+            .nav-social-btn svg { margin: 0; width: 20px; height: 20px; }
+
+            .quick-nav { flex-direction: row; gap: 10px; margin-top: 25px; justify-content: center; }
+            .nav-btn { padding: 8px 12px; font-size: 0.85rem; flex: 1; justify-content: center; } 
 
             /* Tool 1: Xếp dọc vì video 16:9 ngang để cùng hàng sẽ bị quá bé */
             .video-case .outputs-wrapper { flex-direction: column; }
@@ -680,6 +727,7 @@
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
 
+    <!-- NAVBAR MỚI CÓ NÚT YOUTUBE GÓC PHẢI -->
     <nav class="navbar">
         <a href="#" class="brand">
             <div class="brand-icon" style="background: transparent; border: none; box-shadow: none;">
@@ -704,22 +752,105 @@
             </div>
             <span class="brand-name">NINIMAX</span>
         </a>
+        
+        <a href="https://www.youtube.com/@nini.sharetools" target="_blank" class="nav-social-btn" title="Kênh YouTube NINIMAX">
+            <svg viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+            <span class="yt-text">YouTube</span>
+        </a>
     </nav>
+    
     <header class="fade-in-up">
         <span class="tagline">Trợ Thủ Đắc Lực Cho Dân Sáng Tạo</span>
         <h1>Làm Video Chưa Bao Giờ<br>Dễ Đến Thế</h1>
         <p class="subtitle">Quên đi hàng giờ ngồi cắt ghép mệt mỏi! Để NINI lo trọn gói khâu làm video từ A-Z. Việc của bạn chỉ là rảnh tay lên ý tưởng, vít scale và x10 doanh thu mỗi tháng.</p>
         
+        <!-- TRẢ LẠI 2 NÚT GỐC -->
         <div class="quick-nav fade-in-up delay-1">
-            <a href="#tool-reup" class="nav-btn nav-t1">🌐 Reup Pro AI</a>
             <a href="#tool-autoclip" class="nav-btn nav-t2">⚡ Smart Cut AI</a>
+            <a href="#tool-reup" class="nav-btn nav-t1">🌐 Reup Pro AI</a>
         </div>
     </header>
 
     <main class="container">
         
+        <!-- TOOL 2: AUTOCLIP AI -->
+        <div class="card card-t2 fade-in-up delay-1" id="tool-autoclip">
+            <div class="badge">🔥 Bán Chạy</div>
+            <h2 class="card-title">⚡ Smart Cut<span>AI</span></h2>
+            <p class="card-subtitle">Xưởng sản xuất video ngắn công nghiệp tự động</p>
+            
+            <div class="video-demo-box">
+                <p class="demo-title">Trải Nghiệm Cắt Auto Shorts</p>
+                
+                <div class="video-case">
+                    <div class="full-width video-wrapper-goc">
+                        <span class="video-label input">📥 VIDEO GỐC (Podcast / Vlog Dài)</span>
+                        <div class="custom-video-player">
+                            <video controls playsinline preload="metadata">
+                                <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260266/ngang_lxpuwl.mp4#t=0.001" type="video/mp4">
+                            </video>
+                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        </div>
+                    </div>
+                    
+                    <button class="action-btn action-t2" onclick="processVideo(this)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        Phân Tích & Cắt Auto Shorts (9:16)
+                    </button>
+                    
+                    <div class="hidden-outputs" style="flex-direction: column; align-items: center;">
+                        <span class="video-label output" style="margin: 10px 0;">📤 KẾT QUẢ: Bắt Highlight & Tracking Face</span>
+                        <div class="multi-video-output">
+                            <div class="video-wrapper">
+                                <div class="custom-video-player">
+                                    <video controls playsinline preload="metadata">
+                                        <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260293/ngang-1_iimyrt.mp4#t=0.001" type="video/mp4">
+                                    </video>
+                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                </div>
+                            </div>
+                            <div class="video-wrapper">
+                                <div class="custom-video-player">
+                                    <video controls playsinline preload="metadata">
+                                        <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260318/ngang-2_huggvq.mp4#t=0.001" type="video/mp4">
+                                    </video>
+                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                </div>
+                            </div>
+                            <div class="video-wrapper">
+                                <div class="custom-video-player">
+                                    <video controls playsinline preload="metadata">
+                                        <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260339/ngang-3_vbdocp.mp4#t=0.001" type="video/mp4">
+                                    </video>
+                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           <ul class="features-list">
+                <li><span class="highlight">Nhân bản Siêu Tốc:</span> Biến 1 video dài thành hàng chục clip ngắn 9:16 chỉ với 1 cú click.</li>
+                <li><span class="highlight">Highlight Thông Minh:</span> AI tự động phân tích và bắt trọn những đoạn có nội dung kịch tính, hấp dẫn nhất.</li>
+                <li><span class="highlight">Chấm Điểm Viral AI:</span> Đánh giá xác suất lên xu hướng (Viral Score) cho từng clip. Đăng là có view!</li>
+                <li><span class="highlight">Phụ đề Động Triệu View:</span> Chạy chữ phong cách Alex Hormozi cực cuốn, tăng gấp 3 lần tỷ lệ giữ chân.</li>
+                <li><span class="highlight">Tracking Khuôn Mặt 3D:</span> Auto focus giữ chủ thể luôn ở trung tâm khung hình. Trải nghiệm xem cực mượt.</li>
+                <li><span class="highlight">Tối ưu công nghiệp:</span> Giải pháp số 1 để xây kênh TikTok Beta: Cày view ngoại - Nhận RPM cao - Thu nhập USD.</li>
+            </ul>
+            <div class="bonus-box">
+                <span class="bonus-icon">🔥</span>
+                <div class="bonus-content">
+                    <h4>Hệ sinh thái Hỗ trợ Thực chiến</h4>
+                    <p>Hỗ trợ <strong>TikTok Beta chuyên sâu</strong> | Cung cấp nguồn Acc & Tool bổ trợ | Cập nhật kho <strong>Key ngách xu hướng</strong> & trọn bộ <strong>TUT mỏ vàng</strong>.</p>
+                </div>
+            </div>
+
+            <a href="https://zalo.me/0876762457" target="_blank" class="btn">⚡Tư Vấn Dùng Thử & Cài Đặt</a>
+        </div>
+
         <!-- TOOL 1: REUP-VIDEO-PRO -->
-        <div class="card card-t1 fade-in-up delay-1" id="tool-reup">
+        <div class="card card-t1 fade-in-up delay-2" id="tool-reup">
             <div class="badge" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);">💎 Độc Quyền</div>
             <h2 class="card-title">🌐Reup Pro <span>AI</span></h2>
             <p class="card-subtitle">Biến 1 video thành cỗ máy in tiền đa quốc gia</p>
@@ -809,16 +940,6 @@
                 </div>
             </div>
 
-           <!--  <ul class="features-list">
-                <li><span class="highlight">Tự động 100%:</span> Chỉ cần tải video lên, hệ thống lo từ A-Z.</li>
-                <li><span class="highlight">Xử lý siêu chính xác:</span> Lấy voice và trích xuất phụ đề bằng AI OCR.</li>
-                <li><span class="highlight">Kho AI Voice:</span> Giọng đọc bản địa tự nhiên, phong phú mọi quốc gia.</li>
-                <li><span class="highlight">Tối ưu công nghiệp:</span> Cho Affiliates, người xây kênh đa nền tảng.</li>
-                <li><span class="exclusive">Độc quyền:</span> Chỉ che khi có sub, trả lại hình ảnh gốc khi sub hết.</li>
-                <li><span class="highlight">Chất lượng cao:</span> Xuất File 1080p, 4K sắc nét và giữ nguyên chất lượng.</li>
-            </ul>
-
- -->
             <ul class="features-list">
                 <li><span class="highlight">Tuỳ chỉnh:</span> font, màu chữ, nền chữ & âm lượng nhạc nền theo phong cách riêng.</li>
                 <li><span class="highlight">Tự động 100%:</span> Chỉ cần tải video lên, hệ thống lo từ A-Z.</li>
@@ -837,83 +958,7 @@
                     <p>Sở hữu bí kíp <strong>vận hành kênh từ A-Z</strong>: Quy trình Build acc, mẹo Bật kiếm tiền và tặng kèm <strong>Full bộ Tool tải video hàng loạt</strong> đa nền tảng.</p>
                 </div>
             </div>
-            <a href="https://zalo.me/0876762457" target="_blank" class="btn">🚀 Liên Hệ Mua REUP-PRO-AI</a>
-        </div>
-
-        <!-- TOOL 2: AUTOCLIP AI -->
-        <div class="card card-t2 fade-in-up delay-2" id="tool-autoclip">
-            <div class="badge">🔥 Bán Chạy</div>
-            <h2 class="card-title">⚡ Smart Cut<span>AI</span></h2>
-            <p class="card-subtitle">Xưởng sản xuất video ngắn công nghiệp tự động</p>
-            
-            <div class="video-demo-box">
-                <p class="demo-title">Trải Nghiệm Cắt Auto Shorts</p>
-                
-                <div class="video-case">
-                    <div class="full-width video-wrapper-goc">
-                        <span class="video-label input">📥 VIDEO GỐC (Podcast / Vlog Dài)</span>
-                        <div class="custom-video-player">
-                            <video controls playsinline preload="metadata">
-                                <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260266/ngang_lxpuwl.mp4#t=0.001" type="video/mp4">
-                            </video>
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        </div>
-                    </div>
-                    
-                    <button class="action-btn action-t2" onclick="processVideo(this)">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        Phân Tích & Cắt Auto Shorts (9:16)
-                    </button>
-                    
-                    <div class="hidden-outputs" style="flex-direction: column; align-items: center;">
-                        <span class="video-label output" style="margin: 10px 0;">📤 KẾT QUẢ: Bắt Highlight & Tracking Face</span>
-                        <div class="multi-video-output">
-                            <div class="video-wrapper">
-                                <div class="custom-video-player">
-                                    <video controls playsinline preload="metadata">
-                                        <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260293/ngang-1_iimyrt.mp4#t=0.001" type="video/mp4">
-                                    </video>
-                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                                </div>
-                            </div>
-                            <div class="video-wrapper">
-                                <div class="custom-video-player">
-                                    <video controls playsinline preload="metadata">
-                                        <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260318/ngang-2_huggvq.mp4#t=0.001" type="video/mp4">
-                                    </video>
-                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                                </div>
-                            </div>
-                            <div class="video-wrapper">
-                                <div class="custom-video-player">
-                                    <video controls playsinline preload="metadata">
-                                        <source src="https://res.cloudinary.com/dmrjsn31y/video/upload/v1778260339/ngang-3_vbdocp.mp4#t=0.001" type="video/mp4">
-                                    </video>
-                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-           <ul class="features-list">
-                <li><span class="highlight">Nhân bản Siêu Tốc:</span> Biến 1 video dài thành hàng chục clip ngắn 9:16 chỉ với 1 cú click.</li>
-                <li><span class="highlight">Highlight Thông Minh:</span> AI tự động phân tích và bắt trọn những đoạn có nội dung kịch tính, hấp dẫn nhất.</li>
-                <li><span class="highlight">Chấm Điểm Viral AI:</span> Đánh giá xác suất lên xu hướng (Viral Score) cho từng clip. Đăng là có view!</li>
-                <li><span class="highlight">Phụ đề Động Triệu View:</span> Chạy chữ phong cách Alex Hormozi cực cuốn, tăng gấp 3 lần tỷ lệ giữ chân.</li>
-                <li><span class="highlight">Tracking Khuôn Mặt 3D:</span> Auto focus giữ chủ thể luôn ở trung tâm khung hình. Trải nghiệm xem cực mượt.</li>
-                <li><span class="highlight">Tối ưu công nghiệp:</span> Giải pháp số 1 để xây kênh TikTok Beta: Cày view ngoại - Nhận RPM cao - Thu nhập USD.</li>
-            </ul>
-            <div class="bonus-box">
-                <span class="bonus-icon">🔥</span>
-                <div class="bonus-content">
-                    <h4>Hệ sinh thái Hỗ trợ Thực chiến</h4>
-                    <p>Hỗ trợ <strong>TikTok Beta chuyên sâu</strong> | Cung cấp nguồn Acc & Tool bổ trợ | Cập nhật kho <strong>Key ngách xu hướng</strong> & trọn bộ <strong>TUT mỏ vàng</strong>.</p>
-                </div>
-            </div>
-
-            <a href="https://zalo.me/0876762457" target="_blank" class="btn">⚡ Mở Khóa Smart Cut AI</a>
+            <a href="https://zalo.me/0876762457" target="_blank" class="btn">🚀 Tư Vấn Dùng Thử & Cài Đặt</a>
         </div>
 
     </main>
@@ -936,10 +981,20 @@
         </div>
         <div class="footer-logo" style="color: var(--t1-primary); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Kiến Tạo Kỷ Nguyên Video Tự Động</div>
         <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto 25px; color: var(--text-muted); line-height: 1.6;">Giải pháp hoàn hảo giúp bạn <strong style="color: #fff;">phủ sóng toàn cầu (REUP-PRO-AI)</strong> và <strong style="color: #fff;">phủ sóng đa kênh (Smart-Cut-AI)</strong>. Dẹp bỏ rào cản kỹ thuật, rảnh tay vít scale và x10 doanh thu mỗi tháng!</p>
+        
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 40px; margin-bottom: 25px; font-size: 1rem; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; display: inline-flex; border: 1px solid rgba(255,255,255,0.05);">
             <span>Đồng hành 1-1: <strong style="color: var(--t2-secondary);">24/7</strong></span>
             <span>Hotline / Zalo: <strong style="color: var(--t1-primary); font-size: 1.1rem;">0876.762.457</strong></span>
         </div>
+        
+        <br>
+        <a href="https://www.youtube.com/@nini.sharetools" target="_blank" class="yt-footer-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/>
+            </svg>
+            Theo dõi hướng dẫn chi tiết trên YouTube
+        </a>
+
         <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); max-width: 400px; margin: 0 auto 20px;">
         <p style="font-size: 0.85rem; color: #64748b;">© 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa</p>
     </footer>
