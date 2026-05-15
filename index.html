@@ -152,7 +152,31 @@
             text-transform: uppercase;
         }
 
-        /* --- Nút YouTube trên Navbar --- */
+        /* Navbar Right Actions */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-phone {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+        .nav-phone:hover {
+            transform: translateY(-2px);
+        }
+        .nav-phone svg {
+            width: 18px; height: 18px;
+            color: var(--t1-primary);
+        }
+
         .nav-social-btn {
             display: flex;
             align-items: center;
@@ -502,9 +526,6 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ======================================================== */
-        /* FIX LỖI KHOẢNG TRỐNG: ẨN HOÀN TOÀN KHI CHƯA ACTIVE       */
-        /* ======================================================== */
         .hidden-outputs {
             display: none !important;
             opacity: 0;
@@ -519,10 +540,6 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* ======================================================== */
-        /* TỐI ƯU LẠI BỐ CỤC ĐỂ ĐẢM BẢO LUÔN NẰM TRÊN 1 HÀNG NGANG */
-        /* ======================================================== */
 
         .video-case .outputs-wrapper {
             display: flex;
@@ -626,31 +643,61 @@
         .zalo-group-btn:hover { transform: translateY(-5px); background: linear-gradient(135deg, #005ce6, #0099e6); }
         .zalo-icon { font-size: 1rem; font-weight: 800; background: white; color: #0068ff; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
 
-        /* --- Nút Chat Zalo Nổi (Xếp trên nút Group Góc Phải) --- */
-        .zalo-contact-floating {
+        /* --- Nút Liên Hệ Zalo Nổi (Góc Trái - Dạng Pill) --- */
+        .hotline-floating {
             position: fixed;
-            bottom: 95px; /* Dịch lên trên nút Group */
-            right: 30px;  /* Nằm cùng góc phải */
-            background: #0068ff;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(3, 5, 10, 0.6);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            padding: 6px 20px 6px 6px;
+            gap: 12px;
+            z-index: 1000;
             text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+        }
+        .hotline-floating:hover {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--t1-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
+        }
+        .hotline-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--t1-primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            font-weight: 800;
-            font-size: 16px;
-            box-shadow: 0 10px 30px rgba(0, 104, 255, 0.3);
-            border: 2px solid #ffffff;
-            animation: pulse-zalo 2s infinite;
-            transition: all 0.3s ease;
+            color: #000;
+            animation: pulse-hotline 2s infinite;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
-        .zalo-contact-floating:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: #005ce6;
+        .hotline-floating:hover .hotline-icon {
+            animation: none;
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+        .hotline-text {
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .hotline-text strong {
+            color: var(--t1-primary);
+            font-weight: 800;
+        }
+        @keyframes pulse-hotline {
+            0% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 242, 254, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
         }
 
         /* --- Style cho nút YouTube dưới Footer --- */
@@ -701,6 +748,7 @@
             .nav-social-btn .yt-text { display: none; }
             .nav-social-btn { padding: 8px; border-radius: 50%; }
             .nav-social-btn svg { margin: 0; width: 20px; height: 20px; }
+            .nav-phone { display: none; } /* Ẩn số ĐT trên thanh điều hướng trên mobile để tránh chật */
 
             .quick-nav { flex-direction: row; gap: 10px; margin-top: 25px; justify-content: center; }
             .nav-btn { padding: 8px 12px; font-size: 0.85rem; flex: 1; justify-content: center; } 
@@ -731,8 +779,12 @@
             .zalo-group-btn { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 0.8rem; }
             .zalo-icon { width: 20px; height: 20px; font-size: 0.8rem; }
             
-            /* Tối ưu lại vị trí nút Chat Zalo trên mobile */
-            .zalo-contact-floating { bottom: 70px; right: 15px; width: 50px; height: 50px; font-size: 14px; }
+            /* Căn lại nút Liên Hệ Nổi trên Điện thoại */
+            .hotline-floating { bottom: 15px; left: 15px; padding: 5px 15px 5px 5px; gap: 8px; }
+            .hotline-icon { width: 32px; height: 32px; }
+            .hotline-icon svg { width: 16px; height: 16px; }
+            .hotline-text { font-size: 0.9rem; }
+            .hide-mobile { display: none; }
         }
     </style>
 </head>
@@ -767,10 +819,20 @@
             <span class="brand-name">NINIMAX</span>
         </a>
         
-        <a href="https://www.youtube.com/@nini.sharetools" target="_blank" class="nav-social-btn" title="Kênh YouTube NINIMAX">
-            <svg viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
-            <span class="yt-text">YouTube</span>
-        </a>
+        <!-- Navbar Right Area (SĐT + YouTube) -->
+        <div class="nav-right">
+            <a href="https://zalo.me/0876762457" target="_blank" class="nav-phone" title="Liên hệ Zalo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                Liên hệ: <span style="color: var(--t1-primary); margin-left: 4px;">0876.762.457</span>
+            </a>
+            
+            <a href="https://www.youtube.com/@nini.sharetools" target="_blank" class="nav-social-btn" title="Kênh YouTube NINIMAX">
+                <svg viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+                <span class="yt-text">YouTube</span>
+            </a>
+        </div>
     </nav>
     
     <header class="fade-in-up">
@@ -1011,9 +1073,14 @@
         <p style="font-size: 0.85rem; color: #64748b;">© 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa</p>
     </footer>
     
-    <!-- NÚT CHAT ZALO NỔI (Giờ đã nằm trên Group Zalo Góc Phải) -->
-    <a href="https://zalo.me/0876762457" target="_blank" class="zalo-contact-floating" title="Chat Zalo ngay">
-        Zalo
+    <!-- NÚT LIÊN HỆ NỔI GÓC TRÁI (THIẾT KẾ MỚI ĐẸP MẮT) -->
+    <a href="https://zalo.me/0876762457" target="_blank" class="hotline-floating">
+        <div class="hotline-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+        </div>
+        <span class="hotline-text"><span class="hide-mobile">Liên hệ: </span><strong>0876 762 457</strong></span>
     </a>
 
     <!-- NÚT NHÓM ZALO GÓC PHẢI -->
