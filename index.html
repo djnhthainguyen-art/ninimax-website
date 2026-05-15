@@ -626,11 +626,11 @@
         .zalo-group-btn:hover { transform: translateY(-5px); background: linear-gradient(135deg, #005ce6, #0099e6); }
         .zalo-icon { font-size: 1rem; font-weight: 800; background: white; color: #0068ff; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
 
-        /* --- Nút Chat Zalo Nổi (Góc Trái) --- */
+        /* --- Nút Chat Zalo Nổi (Xếp trên nút Group Góc Phải) --- */
         .zalo-contact-floating {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 95px; /* Dịch lên trên nút Group */
+            right: 30px;  /* Nằm cùng góc phải */
             background: #0068ff;
             color: white;
             width: 60px;
@@ -730,7 +730,9 @@
             
             .zalo-group-btn { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 0.8rem; }
             .zalo-icon { width: 20px; height: 20px; font-size: 0.8rem; }
-            .zalo-contact-floating { bottom: 15px; left: 15px; width: 50px; height: 50px; font-size: 14px; }
+            
+            /* Tối ưu lại vị trí nút Chat Zalo trên mobile */
+            .zalo-contact-floating { bottom: 70px; right: 15px; width: 50px; height: 50px; font-size: 14px; }
         }
     </style>
 </head>
@@ -1009,7 +1011,7 @@
         <p style="font-size: 0.85rem; color: #64748b;">© 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa</p>
     </footer>
     
-    <!-- NÚT LIÊN HỆ ZALO NỔI GÓC TRÁI -->
+    <!-- NÚT CHAT ZALO NỔI (Giờ đã nằm trên Group Zalo Góc Phải) -->
     <a href="https://zalo.me/0876762457" target="_blank" class="zalo-contact-floating" title="Chat Zalo ngay">
         Zalo
     </a>
