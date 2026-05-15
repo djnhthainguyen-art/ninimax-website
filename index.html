@@ -113,8 +113,8 @@
             height: 70px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Giãn cách 2 bên */
-            padding: 0 5%; /* Căn lề */
+            justify-content: space-between;
+            padding: 0 5%;
             background: rgba(3, 5, 10, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -506,14 +506,13 @@
         /* FIX LỖI KHOẢNG TRỐNG: ẨN HOÀN TOÀN KHI CHƯA ACTIVE       */
         /* ======================================================== */
         .hidden-outputs {
-            display: none !important; /* Quan trọng: Không cho chiếm không gian */
+            display: none !important;
             opacity: 0;
             width: 100%;
         }
         
-        /* Hiệu ứng trượt và hiển thị mượt mà khi bấm nút */
         .hidden-outputs.active {
-            display: flex !important; /* Chuyển thành Flex khi mở */
+            display: flex !important;
             animation: fadeUpOutputs 0.6s ease forwards;
         }
         @keyframes fadeUpOutputs {
@@ -525,7 +524,6 @@
         /* TỐI ƯU LẠI BỐ CỤC ĐỂ ĐẢM BẢO LUÔN NẰM TRÊN 1 HÀNG NGANG */
         /* ======================================================== */
 
-        /* Bố cục kết quả xuất (Tool 1) */
         .video-case .outputs-wrapper {
             display: flex;
             flex-direction: row; 
@@ -535,7 +533,6 @@
             width: 100%;
         }
 
-        /* Bố cục kết quả xuất (Tool 2) - Xếp 3 video 1 hàng */
         .multi-video-output {
             display: flex;
             flex-direction: row;
@@ -550,16 +547,8 @@
             flex: 1; 
         }
 
-        /* ========================================= */
-        /* TỶ LỆ KHUNG HÌNH (16:9 CHO TOOL 1, 9:16 CHO KẾT QUẢ TOOL 2) */
-        /* ========================================= */
-        
-        /* 1. TOÀN BỘ VIDEO TẠI TOOL 1 LÀ 16:9 */
-        #tool-reup .custom-video-player {
-            aspect-ratio: 16/9;
-        }
+        #tool-reup .custom-video-player { aspect-ratio: 16/9; }
 
-        /* 2. TOOL 2: GỐC LÀ 16:9, KẾT QUẢ LÀ 9:16 */
         #tool-autoclip .video-wrapper-goc .custom-video-player {
             aspect-ratio: 16/9;
             max-width: 600px;
@@ -625,7 +614,7 @@
         }
         .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); filter: brightness(1.1); }
 
-        /* --- Nút Group Zalo Nổi --- */
+        /* --- Nút Group Zalo Nổi (Góc Phải) --- */
         .zalo-group-btn {
             position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #0068ff, #00aaff);
             color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 600;
@@ -636,6 +625,33 @@
         @keyframes pulse-zalo { 0% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(0, 104, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0); } }
         .zalo-group-btn:hover { transform: translateY(-5px); background: linear-gradient(135deg, #005ce6, #0099e6); }
         .zalo-icon { font-size: 1rem; font-weight: 800; background: white; color: #0068ff; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+
+        /* --- Nút Chat Zalo Nổi (Góc Trái) --- */
+        .zalo-contact-floating {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #0068ff;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(0, 104, 255, 0.3);
+            border: 2px solid #ffffff;
+            animation: pulse-zalo 2s infinite;
+            transition: all 0.3s ease;
+        }
+        .zalo-contact-floating:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #005ce6;
+        }
 
         /* --- Style cho nút YouTube dưới Footer --- */
         .yt-footer-btn {
@@ -681,34 +697,30 @@
             .card-title { font-size: 1.6rem; }
             .price { font-size: 2rem; }
             
-            /* Navbar Mobile: Trái Logo - Phải Icon YT Bo tròn */
             .navbar { justify-content: space-between; padding: 0 20px; height: 60px; }
-            .nav-social-btn .yt-text { display: none; } /* Ẩn chữ YouTube trên mobile cho gọn */
+            .nav-social-btn .yt-text { display: none; }
             .nav-social-btn { padding: 8px; border-radius: 50%; }
             .nav-social-btn svg { margin: 0; width: 20px; height: 20px; }
 
             .quick-nav { flex-direction: row; gap: 10px; margin-top: 25px; justify-content: center; }
             .nav-btn { padding: 8px 12px; font-size: 0.85rem; flex: 1; justify-content: center; } 
 
-            /* Tool 1: Xếp dọc vì video 16:9 ngang để cùng hàng sẽ bị quá bé */
             .video-case .outputs-wrapper { flex-direction: column; }
             
-            /* Tool 2: Xếp CẢ 3 TRÊN 1 HÀNG MÀ KHÔNG CẦN CUỘN NGANG */
             .multi-video-output { 
                 display: flex;
                 flex-direction: row; 
-                gap: 8px; /* Ép khoảng cách hẹp lại */
+                gap: 8px; 
                 padding: 0; 
                 overflow: hidden; 
                 width: 100%;
             }
             .multi-video-output .video-wrapper { 
                 flex: 1; 
-                width: 33.33%; /* Ép đều 3 phần */
+                width: 33.33%; 
                 min-width: 0; 
             }
 
-            /* Thu nhỏ nút play ở khung kết quả tool 2 vì video bé */
             .multi-video-output .play-overlay { width: 36px; height: 36px; }
             .multi-video-output .play-overlay svg { width: 14px; height: 14px; margin-left: 2px;}
 
@@ -718,6 +730,7 @@
             
             .zalo-group-btn { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 0.8rem; }
             .zalo-icon { width: 20px; height: 20px; font-size: 0.8rem; }
+            .zalo-contact-floating { bottom: 15px; left: 15px; width: 50px; height: 50px; font-size: 14px; }
         }
     </style>
 </head>
@@ -727,7 +740,6 @@
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
 
-    <!-- NAVBAR MỚI CÓ NÚT YOUTUBE GÓC PHẢI -->
     <nav class="navbar">
         <a href="#" class="brand">
             <div class="brand-icon" style="background: transparent; border: none; box-shadow: none;">
@@ -764,7 +776,6 @@
         <h1>Làm Video Chưa Bao Giờ<br>Dễ Đến Thế</h1>
         <p class="subtitle">Quên đi hàng giờ ngồi cắt ghép mệt mỏi! Để NINI lo trọn gói khâu làm video từ A-Z. Việc của bạn chỉ là rảnh tay lên ý tưởng, vít scale và x10 doanh thu mỗi tháng.</p>
         
-        <!-- TRẢ LẠI 2 NÚT GỐC -->
         <div class="quick-nav fade-in-up delay-1">
             <a href="#tool-autoclip" class="nav-btn nav-t2">⚡ Smart Cut AI</a>
             <a href="#tool-reup" class="nav-btn nav-t1">🌐 Reup Pro AI</a>
@@ -870,7 +881,6 @@
                         </div>
                     </div>
                     
-                    <!-- Nút Tương tác thay cho mũi tên -->
                     <button class="action-btn" onclick="processVideo(this)">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         Lồng Tiếng sang Đa Ngôn Ngữ Bằng AI
@@ -999,6 +1009,12 @@
         <p style="font-size: 0.85rem; color: #64748b;">© 2026 <strong>NINIMAX</strong> | Chuyên Tool Edit & Tự Động Hóa</p>
     </footer>
     
+    <!-- NÚT LIÊN HỆ ZALO NỔI GÓC TRÁI -->
+    <a href="https://zalo.me/0876762457" target="_blank" class="zalo-contact-floating" title="Chat Zalo ngay">
+        Zalo
+    </a>
+
+    <!-- NÚT NHÓM ZALO GÓC PHẢI -->
     <a href="https://zalo.me/g/azmjsw001" target="_blank" class="zalo-group-btn">
         <span class="zalo-icon">Z</span> Support & Updates 24/7 (FREE)
     </a>
