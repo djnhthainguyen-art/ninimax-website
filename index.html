@@ -8,379 +8,474 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <meta name="description" content="Làm video tự động đa ngôn ngữ, cắt video short siêu tốc. Rảnh tay x10 doanh thu!">
-    <link rel="canonical" href="https://www.ninimax.com/"> 
-    
+    <link rel="canonical" href="https://www.ninimax.com/">
+
     <link rel="icon" href="logo.png" type="image/png">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.ninimax.com/">
     <meta property="og:title" content="NINIMAX - Nền tảng Auto AI Cao Cấp">
     <meta property="og:description" content="Làm video tự động đa ngôn ngữ, cắt video short siêu tốc. Rảnh tay x10 doanh thu!">
     <meta property="og:image" content="logo.png">
-    
+
     <style>
         :root {
-            /* Premium Dark & Gold Palette */
-            --bg-base: #050507;
-            --bg-surface: rgba(20, 20, 25, 0.6);
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --border-light: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(223, 183, 113, 0.3);
-            
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            
-            --gold-primary: #dfb771;
-            --gold-gradient: linear-gradient(135deg, #f6d365 0%, #dfb771 100%);
-            --gold-glow: rgba(223, 183, 113, 0.15);
-            
-            /* Free Tool Accent Color */
-            --blue-free: #38bdf8;
-            --blue-gradient: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
-            
-            --radius-lg: 24px;
+            /* Editorial Gold & Onyx Palette */
+            --bg-base: #08090b;
+            --bg-rich: #0d0e11;
+            --bg-card: rgba(255, 255, 255, 0.025);
+            --border-line: rgba(232, 227, 216, 0.08);
+            --border-hover: rgba(212, 175, 106, 0.35);
+
+            --ink: #e8e3d8;
+            --ink-soft: #9a958a;
+            --ink-faint: #5e5b54;
+
+            --gold: #d4af6a;
+            --gold-bright: #f0d9a8;
+            --gold-deep: #a8804a;
+            --gold-gradient: linear-gradient(135deg, #f0d9a8 0%, #d4af6a 55%, #a8804a 100%);
+            --gold-line: linear-gradient(180deg, transparent, var(--gold), transparent);
+
+            --blue: #38bdf8;
+            --blue-deep: #0c6694;
+            --blue-gradient: linear-gradient(135deg, #38bdf8 0%, #0c6694 100%);
+
+            --serif: 'Fraunces', serif;
+            --sans: 'Plus Jakarta Sans', sans-serif;
+
+            --radius-lg: 28px;
             --radius-md: 16px;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { 
-            background-color: var(--bg-base); 
-            color: var(--text-main); 
-            line-height: 1.7; 
-            overflow-x: hidden; 
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--ink);
+            font-family: var(--sans);
+            line-height: 1.7;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
-        /* --- Luxury Background Effects --- */
-        .bg-glow {
-            position: fixed; top: -20%; left: -10%; width: 50vw; height: 50vw;
-            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
-            z-index: -1; filter: blur(80px); pointer-events: none;
-        }
-        .bg-glow-2 {
-            position: fixed; bottom: -20%; right: -10%; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
-            z-index: -1; filter: blur(100px); pointer-events: none;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
         }
 
-        /* --- Premium Navbar --- */
-        .navbar { 
-            position: fixed; top: 0; left: 0; right: 0; height: 80px; 
-            display: flex; align-items: center; justify-content: space-between; 
-            padding: 0 6%; 
-            background: rgba(5, 5, 7, 0.7); 
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
-            border-bottom: 1px solid var(--border-light); 
-            z-index: 1000; transition: var(--transition);
+        /* ============ AMBIENT BACKGROUND ============ */
+        .bg-noise {
+            position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.4;
+            background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 3px 3px;
         }
-        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
-        .brand-icon svg { width: 32px; height: 32px; fill: url(#gold-grad); }
-        .brand-name { font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05em; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .bg-glow { position: fixed; top: -15%; left: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(212,175,106,0.12) 0%, transparent 70%); z-index: -1; filter: blur(90px); pointer-events: none; }
+        .bg-glow-2 { position: fixed; bottom: -20%; right: -15%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(56,189,248,0.07) 0%, transparent 70%); z-index: -1; filter: blur(110px); pointer-events: none; }
 
-        .nav-right { display: flex; align-items: center; gap: 32px; }
-        .nav-link { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 0.95rem; text-decoration: none; color: var(--text-muted); transition: var(--transition); }
-        .nav-link:hover { color: var(--gold-primary); }
-        .nav-link svg { width: 18px; height: 18px; fill: currentColor; }
+        /* ============ NAVBAR ============ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; height: 84px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 6%; background: rgba(8,9,11,0.72);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-line); z-index: 1000;
+        }
+        .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; cursor: pointer; }
+        .brand-icon svg { width: 30px; height: 30px; }
+        .brand-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em; color: var(--ink); }
+        .brand-name em { font-style: normal; color: var(--gold); }
 
-        /* --- Hero Section --- */
-        header { text-align: center; padding: 180px 20px 80px; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
-        
-        .tagline { 
-            display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; 
-            background: rgba(223, 183, 113, 0.05); border: 1px solid rgba(223, 183, 113, 0.2); 
-            border-radius: 999px; font-size: 0.75rem; font-weight: 600; color: var(--gold-primary); 
-            margin-bottom: 32px; letter-spacing: 0.15em; text-transform: uppercase; 
-            box-shadow: 0 0 20px rgba(223, 183, 113, 0.1);
+        .nav-right { display: flex; align-items: center; gap: 36px; }
+        .nav-link { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 0.92rem; text-decoration: none; color: var(--ink-soft); transition: color 0.3s var(--ease); }
+        .nav-link:hover { color: var(--gold); }
+        .nav-link svg { width: 17px; height: 17px; fill: currentColor; }
+
+        /* ============ VIEW MANAGEMENT ============ */
+        .view-section { display: none !important; width: 100%; }
+        .view-section.active { display: block !important; animation: fadeUp 0.55s var(--ease) forwards; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px 10px 16px;
+            color: var(--ink-soft); font-size: 0.92rem; font-weight: 500; cursor: pointer;
+            margin: 140px 0 0; transition: all 0.3s var(--ease); text-decoration: none;
+            border-radius: 999px; border: 1px solid var(--border-line);
         }
-        
-        h1 { 
-            font-size: 4.5rem; font-weight: 800; margin-bottom: 24px; line-height: 1.1; 
-            letter-spacing: -0.03em; max-width: 900px;
-            background: linear-gradient(to bottom right, #ffffff 30%, #a1a1aa 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .btn-back:hover { color: var(--gold); background: rgba(212,175,106,0.06); border-color: var(--border-hover); transform: translateX(-4px); }
+        .detail-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 100px; }
+
+        /* ============ HERO ============ */
+        header.hero {
+            position: relative; z-index: 10; padding: 200px 24px 0;
+            max-width: 1240px; margin: 0 auto;
         }
-        .subtitle { 
-            font-size: 1.2rem; color: var(--text-muted); max-width: 650px; 
-            margin: 0 auto; font-weight: 400; line-height: 1.8; 
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        .eyebrow-rule {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+        }
+        .eyebrow-rule .line { width: 32px; height: 1px; background: var(--gold); }
+        .eyebrow-rule span {
+            font-size: 0.74rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold);
+        }
+        h1.hero-title {
+            font-family: var(--serif); font-weight: 600; font-size: 4.2rem; line-height: 1.04;
+            letter-spacing: -0.01em; color: var(--ink); margin-bottom: 28px;
+        }
+        h1.hero-title em { font-style: italic; font-weight: 500; color: var(--gold-bright); }
+        .hero-sub { font-size: 1.15rem; color: var(--ink-soft); max-width: 480px; margin-bottom: 44px; line-height: 1.8; }
+
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+        .hbtn {
+            padding: 17px 30px; border-radius: 999px; text-decoration: none; cursor: pointer;
+            font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 10px;
+            transition: all 0.35s var(--ease); letter-spacing: 0.01em; border: none;
+        }
+        .hbtn.gold { background: var(--gold-gradient); color: #0a0a0a; box-shadow: 0 14px 34px rgba(212,175,106,0.22); }
+        .hbtn.gold:hover { box-shadow: 0 20px 44px rgba(212,175,106,0.4); transform: translateY(-2px); }
+        .hbtn.ghost { background: rgba(255,255,255,0.03); color: var(--ink); border: 1px solid var(--border-line); }
+        .hbtn.ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); }
+        .hbtn svg { width: 18px; height: 18px; }
+
+        .hero-trustline { display: flex; align-items: center; gap: 16px; color: var(--ink-faint); font-size: 0.85rem; }
+        .hero-trustline .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+        /* Hero visual: stacked phone-style preview */
+        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; height: 520px; }
+        .hv-frame {
+            position: relative; width: 230px; aspect-ratio: 9/16; border-radius: 26px;
+            background: linear-gradient(160deg, #15151a, #0a0a0c); border: 1px solid var(--border-line);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6); overflow: hidden;
+        }
+        .hv-frame.front { z-index: 3; transform: translateX(0) rotate(0deg) scale(1.05); }
+        .hv-frame.back-left { position: absolute; left: 18%; z-index: 1; transform: rotate(-9deg) scale(0.86) translateY(10px); opacity: 0.55; }
+        .hv-frame.back-right { position: absolute; right: 18%; z-index: 2; transform: rotate(8deg) scale(0.92) translateY(4px); opacity: 0.75; }
+        .hv-frame img, .hv-frame .yt-player { width: 100%; height: 100%; border-radius: 26px; }
+        .hv-badge {
+            position: absolute; top: -14px; right: -14px; z-index: 5;
+            background: var(--gold-gradient); color: #0a0a0a; font-weight: 800; font-size: 0.7rem;
+            padding: 8px 14px; border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase;
+            box-shadow: 0 10px 24px rgba(212,175,106,0.4);
+            animation: badge-float 3s ease-in-out infinite;
+        }
+        @keyframes badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        /* ============ STATS BAR ============ */
+        .stats-section { position: relative; z-index: 10; max-width: 1240px; margin: 120px auto 0; padding: 0 24px; }
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border-line); border-bottom: 1px solid var(--border-line);
+            padding: 44px 0;
+        }
+        .stat-item { text-align: center; position: relative; padding: 0 20px; }
+        .stat-item:not(:last-child)::after {
+            content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: var(--border-line);
+        }
+        .stat-num {
+            font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--gold-bright);
+            font-variant-numeric: tabular-nums; letter-spacing: -0.01em; display: block; margin-bottom: 6px;
+        }
+        .stat-label { font-size: 0.82rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+
+        /* ============ SECTION HEADER (shared editorial style) ============ */
+        .sec-head { max-width: 680px; margin-bottom: 64px; }
+        .sec-head.center { margin: 0 auto 64px; text-align: center; }
+        .sec-head .line { width: 32px; height: 1px; background: var(--gold); margin-bottom: 18px; }
+        .sec-head.center .line { margin: 0 auto 18px; }
+        .sec-eyebrow { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 16px; }
+        .sec-title { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--ink); line-height: 1.15; }
+        .sec-desc { color: var(--ink-soft); font-size: 1.02rem; margin-top: 16px; line-height: 1.8; }
+
+        /* ============ PRODUCT COLLECTION (replaces old card grid) ============ */
+        .collection { position: relative; z-index: 10; max-width: 1240px; margin: 140px auto 0; padding: 0 24px; }
+        .product-row {
+            display: grid; grid-template-columns: 110px 1fr 280px; gap: 40px;
+            align-items: center; padding: 52px 0; border-top: 1px solid var(--border-line);
+            position: relative; transition: all 0.4s var(--ease); cursor: pointer;
+        }
+        .product-row:last-child { border-bottom: 1px solid var(--border-line); }
+        .product-row:hover { background: rgba(255,255,255,0.015); }
+        .product-row:hover .product-numeral { color: var(--gold-bright); }
+        .product-row:hover .product-name { color: var(--gold-bright); transform: translateX(6px); }
+        .product-row:hover .prod-arrow { transform: translate(6px,-6px); background: var(--gold-gradient); border-color: transparent; }
+        .product-row:hover .prod-arrow svg { stroke: #0a0a0a; }
+
+        .product-numeral {
+            font-family: var(--serif); font-size: 1.4rem; color: var(--ink-faint);
+            font-style: italic; transition: color 0.4s var(--ease);
+        }
+        .product-name {
+            font-family: var(--serif); font-size: 2.2rem; font-weight: 600; color: var(--ink);
+            transition: all 0.4s var(--ease); margin-bottom: 10px;
+        }
+        .product-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+        .ptag {
+            font-size: 0.74rem; font-weight: 600; padding: 5px 13px; border-radius: 999px;
+            border: 1px solid var(--border-line); color: var(--ink-soft); letter-spacing: 0.02em;
+        }
+        .product-desc { color: var(--ink-soft); font-size: 0.98rem; max-width: 460px; }
+        .product-meta { display: flex; align-items: center; justify-content: flex-end; gap: 18px; }
+        .prod-status {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+            padding: 6px 14px; border-radius: 999px; white-space: nowrap;
+        }
+        .prod-status.bestseller { background: rgba(212,175,106,0.12); color: var(--gold-bright); border: 1px solid rgba(212,175,106,0.3); }
+        .prod-status.licensed { background: rgba(255,255,255,0.05); color: var(--ink-soft); border: 1px solid var(--border-line); }
+        .prod-status.free { background: rgba(56,189,248,0.12); color: var(--blue); border: 1px solid rgba(56,189,248,0.3); }
+        .prod-arrow {
+            flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border-line);
+            display: flex; align-items: center; justify-content: center; transition: all 0.4s var(--ease);
+        }
+        .prod-arrow svg { width: 20px; height: 20px; stroke: var(--ink); transition: stroke 0.3s var(--ease); }
+
+        @media (max-width: 860px) {
+            .product-row { grid-template-columns: 1fr; gap: 16px; text-align: left; padding: 40px 0; }
+            .product-meta { justify-content: flex-start; flex-direction: row-reverse; }
+            .product-numeral { display: none; }
         }
 
-        .quick-nav { display: flex; justify-content: center; gap: 16px; margin-top: 48px; flex-wrap: wrap; }
-        .nav-btn { 
-            padding: 16px 32px; border-radius: 999px; text-decoration: none; 
-            font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; 
-            cursor: pointer; transition: var(--transition); letter-spacing: 0.02em;
+        /* ============ DETAIL VIEW CARD (kept from original concept, refined) ============ */
+        .card {
+            background: var(--bg-card); border-radius: var(--radius-lg); padding: 56px;
+            width: 100%; border: 1px solid var(--border-line); position: relative;
+            display: flex; flex-direction: column; overflow: hidden; backdrop-filter: blur(20px);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.45);
         }
-        .nav-btn.primary { 
-            background: var(--gold-gradient); color: #000; 
-            box-shadow: 0 10px 30px rgba(223, 183, 113, 0.2); 
+        .badge {
+            position: absolute; top: 40px; right: 40px;
+            background: rgba(212,175,106,0.12); color: var(--gold-bright); padding: 7px 18px;
+            font-size: 0.72rem; font-weight: 700; border-radius: 999px; border: 1px solid rgba(212,175,106,0.3);
+            letter-spacing: 0.12em; text-transform: uppercase;
         }
-        .nav-btn.primary:hover { box-shadow: 0 15px 40px rgba(223, 183, 113, 0.4); transform: translateY(-2px); }
-        .nav-btn.secondary { 
-            background: rgba(255,255,255,0.03); color: var(--text-main); 
-            border: 1px solid var(--border-light); backdrop-filter: blur(10px);
-        }
-        .nav-btn.secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
-        .nav-btn.free {
-            background: rgba(56, 189, 248, 0.1); color: var(--blue-free);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-        }
-        .nav-btn.free:hover { background: rgba(56, 189, 248, 0.2); border-color: var(--blue-free); transform: translateY(-2px); }
+        .badge.free-badge { background: rgba(56,189,248,0.12); color: var(--blue); border-color: rgba(56,189,248,0.3); }
 
-        /* --- Views Management --- */
-        .view-section { display: none !important; width: 100%; animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .view-section.active { display: flex !important; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .card-eyebrow { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+        .card-title { font-family: var(--serif); font-size: 2.6rem; color: var(--ink); margin-bottom: 14px; font-weight: 600; }
+        .card-subtitle { font-size: 1.08rem; color: var(--ink-soft); margin-bottom: 44px; font-weight: 400; max-width: 600px; }
 
-        .btn-back { 
-            display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; 
-            color: var(--text-muted); font-size: 0.95rem; font-weight: 500; cursor: pointer; 
-            margin-bottom: 32px; transition: var(--transition); text-decoration: none; align-self: flex-start;
-            border-radius: 999px; border: 1px solid transparent;
-        }
-        .btn-back:hover { color: var(--gold-primary); background: rgba(223, 183, 113, 0.05); border-color: rgba(223, 183, 113, 0.2); transform: translateX(-5px); }
-
-        /* --- Container & Luxury Cards --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 32px; align-items: center; position: relative; z-index: 10; }
-        
-        .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; max-width: 1000px; }
-        .home-grid-full { grid-column: span 2; }
-        
-        .card { 
-            background: var(--bg-card); border-radius: var(--radius-lg); padding: 48px; 
-            width: 100%; border: 1px solid var(--border-light); 
-            transition: var(--transition); position: relative; display: flex; 
-            flex-direction: column; overflow: hidden; backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        .card.interactive:hover { 
-            border-color: var(--border-hover); 
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(223, 183, 113, 0.08);
-        }
-        .card.free-premium:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 30px 60px rgba(56, 189, 248, 0.06);
-        }
-
-        .badge { 
-            position: absolute; top: 32px; right: 32px; 
-            background: linear-gradient(135deg, rgba(223, 183, 113, 0.2), rgba(223, 183, 113, 0.05)); 
-            color: var(--gold-primary); padding: 6px 16px; font-size: 0.75rem; font-weight: 700; 
-            border-radius: 999px; border: 1px solid rgba(223, 183, 113, 0.3);
-            letter-spacing: 0.1em; text-transform: uppercase; 
-        }
-        .badge.free-badge {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
-            color: var(--blue-free); border-color: rgba(56, 189, 248, 0.3);
-        }
-        
-        .card-title { font-size: 2.2rem; color: var(--text-main); margin-bottom: 12px; font-weight: 700; letter-spacing: -0.02em; }
-        .card-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; font-weight: 400; }
-
-        /* --- Free Tool Grid Layout --- */
-        .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; margin-bottom: 40px; }
+        .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; margin-bottom: 44px; }
         .research-item {
-            background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-light);
-            border-radius: var(--radius-md); padding: 24px; transition: var(--transition);
-            display: flex; flex-direction: column; gap: 12px;
+            background: rgba(255,255,255,0.012); border: 1px solid var(--border-line);
+            border-radius: var(--radius-md); padding: 28px 24px; transition: all 0.35s var(--ease);
+            display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden;
         }
-        .research-item:hover { background: rgba(56, 189, 248, 0.03); border-color: rgba(56, 189, 248, 0.2); }
-        .research-icon {
-            width: 40px; height: 40px; border-radius: 10px; background: rgba(56, 189, 248, 0.1);
-            display: flex; align-items: center; justify-content: center; color: var(--blue-free);
-        }
+        .research-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--blue-gradient); opacity: 0; transition: opacity 0.3s; }
+        .research-item:hover { background: rgba(56,189,248,0.04); border-color: rgba(56,189,248,0.25); transform: translateY(-3px); }
+        .research-item:hover::before { opacity: 1; }
+        .research-head { display: flex; align-items: center; gap: 14px; }
+        .research-step { flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.84rem; font-weight: 800; color: var(--blue); font-variant-numeric: tabular-nums; }
+        .research-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, rgba(56,189,248,0.16), rgba(56,189,248,0.04)); border: 1px solid rgba(56,189,248,0.2); display: flex; align-items: center; justify-content: center; color: var(--blue); }
         .research-icon svg { width: 22px; height: 22px; }
-        .research-info h4 { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
-        .research-info p { font-size: 0.9rem; color: var(--text-muted); }
+        .research-info h4 { font-size: 1.08rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+        .research-info p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.65; }
+        .research-info p strong { color: var(--blue); font-weight: 600; }
 
-        /* --- Features & Bonus Box --- */
-        .bonus-box { 
-            background: linear-gradient(135deg, rgba(223, 183, 113, 0.08), transparent); 
-            border: 1px solid rgba(223, 183, 113, 0.2); 
-            border-radius: var(--radius-md); padding: 24px; margin-bottom: 40px; 
-            display: flex; align-items: flex-start; gap: 20px;
-        }
-        .bonus-box.free-bonus {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), transparent); 
-            border-color: rgba(56, 189, 248, 0.2);
-        }
-        .bonus-icon { font-size: 1.8rem; line-height: 1; color: var(--gold-primary); text-shadow: 0 0 15px var(--gold-primary); }
-        .bonus-icon.blue-text { color: var(--blue-free); text-shadow: 0 0 15px var(--blue-free); }
-        .bonus-content h4 { color: var(--gold-primary); font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
-        .bonus-content.blue-title h4 { color: var(--blue-free); }
-        .bonus-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0; }
-        
-        .features-list { list-style: none; margin-bottom: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; }
-        .features-list li { padding-left: 32px; position: relative; font-size: 1rem; color: var(--text-muted); line-height: 1.6; }
-        .features-list li::before { 
-            content: '✦'; position: absolute; left: 0; top: 2px; 
-            color: var(--gold-primary); font-size: 1rem;
-        }
-        .highlight { color: var(--text-main); font-weight: 600; }
+        .bonus-box { background: linear-gradient(135deg, rgba(212,175,106,0.07), transparent); border: 1px solid rgba(212,175,106,0.2); border-radius: var(--radius-md); padding: 26px; margin-bottom: 44px; display: flex; align-items: flex-start; gap: 20px; }
+        .bonus-box.free-bonus { background: linear-gradient(135deg, rgba(56,189,248,0.07), transparent); border-color: rgba(56,189,248,0.2); }
+        .bonus-icon { font-size: 1.7rem; line-height: 1; color: var(--gold); }
+        .bonus-icon.blue-text { color: var(--blue); }
+        .bonus-content h4 { color: var(--gold-bright); font-size: 1.08rem; font-weight: 700; margin-bottom: 8px; }
+        .bonus-content.blue-title h4 { color: var(--blue); }
+        .bonus-content p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
 
-        /* --- Video Demo Section --- */
-        .video-demo-box { 
-            background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-light); 
-            border-radius: var(--radius-md); padding: 40px; margin-bottom: 48px;
-            box-shadow: inset 0 0 40px rgba(255,255,255,0.01);
-        }
-        .demo-title { text-align: center; font-size: 0.85rem; color: var(--gold-primary); margin-bottom: 32px; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; }
+        .features-list { list-style: none; margin-bottom: 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 44px; }
+        .features-list li { padding-left: 30px; position: relative; font-size: 0.98rem; color: var(--ink-soft); line-height: 1.65; }
+        .features-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+        .highlight { color: var(--ink); font-weight: 600; }
 
+        .video-demo-box { background: rgba(0,0,0,0.35); border: 1px solid var(--border-line); border-radius: var(--radius-md); padding: 40px; margin-bottom: 52px; }
+        .demo-title { text-align: center; font-size: 0.8rem; color: var(--gold); margin-bottom: 32px; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; }
         .video-case { display: flex; flex-direction: column; align-items: center; gap: 32px; width: 100%; }
         .video-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; }
         .video-case .video-wrapper-goc { max-width: 560px; width: 100%; }
 
-        /* Actions */
-        .action-btn { 
-            background: var(--gold-gradient); border: none; color: #000; 
-            padding: 18px 40px; border-radius: 999px; font-weight: 700; cursor: pointer; 
-            transition: var(--transition); display: inline-flex; align-items: center; 
-            justify-content: center; gap: 12px; font-size: 1rem; min-width: 280px;
-            box-shadow: 0 10px 30px rgba(223, 183, 113, 0.2); letter-spacing: 0.05em; text-transform: uppercase;
+        .action-btn {
+            background: var(--gold-gradient); border: none; color: #0a0a0a;
+            padding: 18px 40px; border-radius: 999px; font-weight: 700; cursor: pointer;
+            transition: all 0.35s var(--ease); display: inline-flex; align-items: center;
+            justify-content: center; gap: 12px; font-size: 0.96rem; min-width: 280px;
+            box-shadow: 0 12px 30px rgba(212,175,106,0.22); letter-spacing: 0.04em; text-transform: uppercase;
         }
-        .action-btn:hover { box-shadow: 0 15px 40px rgba(223, 183, 113, 0.4); transform: scale(1.02); }
-        .action-btn.processed { background: rgba(255,255,255,0.05); color: var(--gold-primary); box-shadow: none; pointer-events: none; border: 1px solid rgba(223,183,113,0.3); }
-
-        .spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.2); border-right-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        .processed .spinner { border-color: rgba(223,183,113,0.2); border-right-color: var(--gold-primary); }
+        .action-btn:hover { box-shadow: 0 16px 40px rgba(212,175,106,0.4); transform: scale(1.02); }
+        .action-btn.processed { background: rgba(255,255,255,0.05); color: var(--gold-bright); box-shadow: none; pointer-events: none; border: 1px solid rgba(212,175,106,0.3); }
+        .spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.2); border-right-color: #0a0a0a; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .processed .spinner { border-color: rgba(212,175,106,0.2); border-right-color: var(--gold-bright); }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .hidden-outputs { display: none !important; opacity: 0; width: 100%; }
-        .hidden-outputs.active { display: flex !important; animation: fadeUpOutputs 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeUpOutputs { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
+        .hidden-outputs.active { display: flex !important; animation: fadeUpOutputs 0.55s var(--ease) forwards; }
+        @keyframes fadeUpOutputs { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
         .video-case .outputs-wrapper { display: flex; flex-direction: row; justify-content: center; gap: 32px; margin-top: 24px; width: 100%; }
         .multi-video-output { display: flex; flex-direction: row; gap: 24px; justify-content: center; align-items: center; width: 100%; max-width: 900px; margin-top: 24px; }
         .multi-video-output .video-wrapper { flex: 1; }
+        .video-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-line); letter-spacing: 0.1em; text-transform: uppercase; }
+        .video-label.input { color: var(--ink); }
+        .video-label.output { color: var(--gold-bright); border-color: rgba(212,175,106,0.3); background: rgba(212,175,106,0.05); }
 
-        .video-label { 
-            font-size: 0.8rem; font-weight: 700; margin-bottom: 16px; display: inline-flex; 
-            align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border-light); 
-            letter-spacing: 0.1em; text-transform: uppercase;
-        }
-        .video-label.input { color: var(--text-main); }
-        .video-label.output { color: var(--gold-primary); border-color: rgba(223, 183, 113, 0.3); background: rgba(223, 183, 113, 0.05); }
-
-        /* YOUTUBE LAZY LOAD PLAYER */
-        .yt-player { 
-            position: relative; width: 100%; border-radius: 12px; overflow: hidden; 
-            background-color: #000; background-size: cover; background-position: center; 
-            border: 1px solid var(--border-light); cursor: pointer; transition: var(--transition); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .yt-player:hover { transform: scale(1.02); border-color: var(--border-hover); box-shadow: 0 15px 40px rgba(223, 183, 113, 0.15); }
+        .yt-player { position: relative; width: 100%; border-radius: 14px; overflow: hidden; background-color: #000; background-size: cover; background-position: center; border: 1px solid var(--border-line); cursor: pointer; transition: all 0.35s var(--ease); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .yt-player:hover { transform: scale(1.015); border-color: var(--border-hover); }
         .yt-player iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        
-        .play-overlay { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: 64px; height: 64px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            transition: var(--transition); z-index: 2; border: 1px solid rgba(255,255,255,0.1);
-        }
-        .play-overlay svg { width: 28px; height: 28px; fill: #ffffff; margin-left: 4px; transition: var(--transition); }
-        .yt-player:hover .play-overlay { background: var(--gold-gradient); border-color: transparent; transform: translate(-50%, -50%) scale(1.1); }
-        .yt-player:hover .play-overlay svg { fill: #000; }
-        .yt-player.is-playing .play-overlay { display: none; }
+        .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 62px; height: 62px; background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.35s var(--ease); z-index: 2; border: 1px solid rgba(255,255,255,0.1); }
+        .play-overlay svg { width: 26px; height: 26px; fill: #fff; margin-left: 4px; }
+        .yt-player:hover .play-overlay { background: var(--gold-gradient); border-color: transparent; transform: translate(-50%,-50%) scale(1.1); }
+        .yt-player:hover .play-overlay svg { fill: #0a0a0a; }
 
-        /* Main CTA Button */
-        .btn-cta { 
-            display: flex; align-items: center; justify-content: center; gap: 12px; 
-            width: 100%; max-width: 400px; margin: 0 auto; padding: 20px; 
-            font-weight: 700; font-size: 1.1rem; border-radius: 12px; border: none; 
-            cursor: pointer; transition: var(--transition); text-decoration: none; 
-            background: var(--text-main); color: #000; text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        .btn-cta:hover { background: var(--gold-primary); box-shadow: 0 10px 30px rgba(223, 183, 113, 0.3); transform: translateY(-3px); }
+        .btn-cta { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 400px; margin: 0 auto; padding: 20px; font-weight: 700; font-size: 1.05rem; border-radius: 12px; border: none; cursor: pointer; transition: all 0.35s var(--ease); text-decoration: none; background: var(--ink); color: #0a0a0a; text-transform: uppercase; letter-spacing: 0.04em; }
+        .btn-cta:hover { background: var(--gold-bright); box-shadow: 0 12px 32px rgba(212,175,106,0.3); transform: translateY(-3px); }
         .btn-cta.blue-btn { background: var(--blue-gradient); color: #fff; }
-        .btn-cta.blue-btn:hover { background: #0ea5e9; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); }
+        .btn-cta.blue-btn:hover { background: #0ea5e9; box-shadow: 0 12px 32px rgba(56,189,248,0.3); }
 
-        /* Floating buttons */
-        .floating-action {
-            position: fixed; z-index: 1000; display: flex; align-items: center; gap: 10px;
-            background: rgba(20, 20, 25, 0.8); backdrop-filter: blur(10px);
-            border: 1px solid var(--border-light); color: var(--text-main);
-            border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            transition: var(--transition); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* ============ TESTIMONIALS ============ */
+        .testimonial-section { position: relative; z-index: 10; max-width: 1240px; margin: 140px auto 0; padding: 0 24px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .t-card { background: var(--bg-card); border: 1px solid var(--border-line); border-radius: var(--radius-md); padding: 38px 32px; transition: all 0.4s var(--ease); display: flex; flex-direction: column; }
+        .t-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.3); }
+        .t-quote-mark { font-family: var(--serif); font-size: 3.2rem; color: var(--gold); opacity: 0.5; line-height: 1; margin-bottom: 10px; }
+        .t-text { font-size: 1.02rem; color: var(--ink); line-height: 1.75; margin-bottom: 28px; flex-grow: 1; }
+        .t-footer { display: flex; align-items: center; gap: 14px; padding-top: 22px; border-top: 1px solid var(--border-line); }
+        .t-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--gold-gradient); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0a0a0a; font-size: 0.95rem; flex-shrink: 0; }
+        .t-name { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
+        .t-role { font-size: 0.8rem; color: var(--ink-soft); }
+        .t-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+        .t-stars svg { width: 14px; height: 14px; fill: var(--gold); }
+
+        /* ============ PRICING COMPARISON ============ */
+        .pricing-section { position: relative; z-index: 10; max-width: 1100px; margin: 140px auto 0; padding: 0 24px; }
+        .pricing-table { width: 100%; border-collapse: collapse; }
+        .pricing-table th, .pricing-table td { padding: 22px 20px; text-align: center; border-bottom: 1px solid var(--border-line); }
+        .pricing-table th:first-child, .pricing-table td:first-child { text-align: left; padding-left: 4px; }
+        .pricing-table thead th {
+            font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--ink); padding-bottom: 28px; vertical-align: bottom;
         }
-        .floating-action:hover { border-color: var(--gold-primary); background: rgba(30, 30, 35, 0.9); transform: translateY(-3px); }
-        
-        .zalo-group-btn { bottom: 32px; right: 32px; padding: 8px 24px 8px 8px; }
-        .zalo-icon { background: var(--gold-gradient); color: #000; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;}
+        .pricing-table thead th.plan-free { color: var(--blue); }
+        .pricing-table thead th.plan-gold { color: var(--gold-bright); position: relative; }
+        .plan-tag { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; color: var(--ink-faint); }
+        .pricing-table thead th.plan-gold .plan-tag { color: var(--gold); }
+        .pricing-table tbody td:not(:first-child) { font-size: 1.3rem; }
+        .pricing-table tbody tr td:first-child { color: var(--ink-soft); font-size: 0.94rem; font-weight: 500; }
+        .check-yes { color: var(--gold-bright); }
+        .check-yes.blue { color: var(--blue); }
+        .check-no { color: var(--ink-faint); font-size: 1rem; }
+        .pricing-table tbody tr:last-child td { border-bottom: none; padding-top: 36px; }
+        .row-highlight { background: linear-gradient(90deg, transparent, rgba(212,175,106,0.04), transparent); }
 
+        /* ============ FINAL CTA BAND ============ */
+        .final-cta { position: relative; z-index: 10; max-width: 1240px; margin: 140px auto 0; padding: 0 24px; }
+        .final-cta-inner {
+            border: 1px solid rgba(212,175,106,0.25); border-radius: var(--radius-lg);
+            padding: 72px 60px; text-align: center; position: relative; overflow: hidden;
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,175,106,0.08), transparent 60%);
+        }
+        .final-cta-inner h2 { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--ink); margin-bottom: 18px; }
+        .final-cta-inner h2 em { color: var(--gold-bright); font-style: italic; }
+        .final-cta-inner p { color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 36px; max-width: 540px; margin-inline: auto; }
+        .final-cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* ============ FOOTER ============ */
+        footer { text-align: center; padding: 80px 20px 40px; color: var(--ink-soft); margin-top: 100px; border-top: 1px solid var(--border-line); position: relative; z-index: 10; }
+        .footer-brand { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .footer-brand span { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--ink); }
+        .yt-footer-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); border: 1px solid var(--border-line); padding: 12px 28px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.92rem; margin-bottom: 36px; transition: all 0.3s var(--ease); background: rgba(255,255,255,0.02); }
+        .yt-footer-btn:hover { background: rgba(255,0,0,0.08); border-color: #ff0000; color: #ff5050; }
+        .yt-footer-btn svg { width: 19px; height: 19px; }
+        .footer-hotline { margin-bottom: 36px; font-size: 0.95rem; color: var(--ink-soft); display: inline-flex; background: rgba(255,255,255,0.025); padding: 12px 30px; border-radius: 999px; border: 1px solid var(--border-line); }
+
+        /* ============ FLOATING ACTIONS ============ */
+        .floating-action { position: fixed; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(13,14,17,0.85); backdrop-filter: blur(10px); border: 1px solid var(--border-line); color: var(--ink); border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.88rem; transition: all 0.3s var(--ease); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .floating-action:hover { border-color: var(--gold); background: rgba(20,20,24,0.92); transform: translateY(-3px); }
+        .zalo-group-btn { bottom: 32px; right: 32px; padding: 8px 24px 8px 8px; }
+        .zalo-icon { background: var(--gold-gradient); color: #0a0a0a; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; }
         .hotline-btn { bottom: 32px; left: 32px; padding: 8px 24px 8px 8px; }
-        .hotline-icon { width: 32px; height: 32px; background: var(--text-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; }
+        .hotline-icon { width: 32px; height: 32px; background: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0a0a0a; }
         .hotline-icon svg { width: 16px; height: 16px; }
 
-        /* --- Footer --- */
-        footer { 
-            text-align: center; padding: 60px 20px 40px; color: var(--text-muted); 
-            margin-top: 40px; border-top: 1px solid var(--border-light); 
-            background: rgba(0,0,0,0.3); position: relative; z-index: 10; 
-        }
-        .yt-footer-btn { 
-            display: inline-flex; align-items: center; gap: 10px; 
-            color: var(--text-main); border: 1px solid var(--border-light); 
-            padding: 12px 28px; border-radius: 999px; text-decoration: none; 
-            font-weight: 600; font-size: 0.95rem; margin-bottom: 40px; transition: var(--transition);
-            background: rgba(255,255,255,0.02);
-        }
-        .yt-footer-btn:hover { background: rgba(255,0,0,0.1); border-color: #ff0000; color: #ff0000; }
-        .yt-footer-btn svg { width: 20px; height: 20px; }
+        /* ============ WELCOME POPUP ============ */
+        .welcome-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(2,2,4,0.8); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .welcome-overlay.show { opacity: 1; pointer-events: auto; }
+        .welcome-modal { position: relative; width: 100%; max-width: 440px; background: linear-gradient(160deg, rgba(20,20,24,0.98), rgba(8,9,11,0.98)); border: 1px solid rgba(212,175,106,0.25); border-radius: var(--radius-lg); padding: 44px 36px 36px; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212,175,106,0.1); transform: translateY(24px) scale(0.96); opacity: 0; transition: transform 0.45s var(--ease), opacity 0.45s ease; }
+        .welcome-overlay.show .welcome-modal { transform: translateY(0) scale(1); opacity: 1; }
+        .welcome-close { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-line); color: var(--ink-soft); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s var(--ease); }
+        .welcome-close:hover { background: rgba(255,255,255,0.12); color: #fff; transform: rotate(90deg); }
+        .welcome-close svg { width: 16px; height: 16px; }
+        .welcome-icon { width: 72px; height: 72px; margin: 0 auto 20px; border-radius: 20px; background: var(--gold-gradient); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.6rem; color: #0a0a0a; box-shadow: 0 12px 30px rgba(212,175,106,0.35); animation: welcome-icon-pulse 2.2s ease-in-out infinite; }
+        @keyframes welcome-icon-pulse { 0%,100% { box-shadow: 0 12px 30px rgba(212,175,106,0.35); } 50% { box-shadow: 0 12px 40px rgba(212,175,106,0.6); } }
+        .welcome-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+        .welcome-modal h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+        .welcome-modal p { font-size: 0.96rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 28px; }
+        .welcome-modal p strong { color: var(--gold-bright); font-weight: 700; }
+        .welcome-cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 17px; border-radius: 12px; border: none; text-decoration: none; font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; cursor: pointer; background: var(--blue-gradient); color: #fff; box-shadow: 0 10px 28px rgba(56,189,248,0.3); transition: all 0.3s var(--ease); text-transform: uppercase; }
+        .welcome-cta:hover { box-shadow: 0 14px 36px rgba(56,189,248,0.5); transform: translateY(-2px); }
+        .welcome-cta svg { width: 20px; height: 20px; }
+        .welcome-skip { display: block; margin-top: 16px; font-size: 0.85rem; color: var(--ink-soft); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: color 0.3s; background: none; border: none; }
+        .welcome-skip:hover { color: var(--ink); }
 
-        /* Responsive */
-        @media (max-width: 900px) { 
-            h1 { font-size: 3rem; } 
-            .home-grid { grid-template-columns: 1fr; }
-            .home-grid-full { grid-column: span 1; }
-            .features-list, .research-grid { grid-template-columns: 1fr; gap: 16px; } 
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 980px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 50px; }
+            .hero-visual { height: 420px; margin-top: 20px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
+            .stat-item:nth-child(2)::after { display: none; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .features-list, .research-grid { grid-template-columns: 1fr; gap: 16px; }
+            .pricing-table { font-size: 0.85rem; }
+            .pricing-table th, .pricing-table td { padding: 16px 10px; }
         }
         @media (max-width: 600px) {
-            header { padding: 140px 15px 60px; }
-            h1 { font-size: 2.2rem; }
+            header.hero { padding: 150px 20px 0; }
+            h1.hero-title { font-size: 2.6rem; }
             .navbar { padding: 0 20px; height: 70px; }
             .nav-link span { display: none; }
-            .quick-nav { flex-direction: column; width: 100%; max-width: 100%; }
-            .nav-btn { width: 100%; justify-content: center; }
+            .hbtn { width: 100%; justify-content: center; }
+            .hero-actions { flex-direction: column; }
+            .stats-bar { grid-template-columns: 1fr 1fr; }
             .video-case .outputs-wrapper { flex-direction: column; }
             .multi-video-output { flex-direction: column; gap: 20px; }
             .multi-video-output .video-wrapper { width: 100%; max-width: 100%; }
             .zalo-group-btn { bottom: 90px; right: 20px; left: 20px; justify-content: center; }
             .hotline-btn { bottom: 30px; right: 20px; left: 20px; justify-content: center; }
-            .card { padding: 32px 24px; }
+            .card { padding: 32px 22px; }
             .action-btn { min-width: 100%; }
+            .final-cta-inner { padding: 48px 28px; }
+            .final-cta-inner h2 { font-size: 1.9rem; }
+            .pricing-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
     </style>
 </head>
 <body>
 
-    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
-      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#f6d365" />
-        <stop offset="100%" stop-color="#dfb771" />
-      </linearGradient>
-    </svg>
-
+    <div class="bg-noise"></div>
     <div class="bg-glow"></div>
     <div class="bg-glow-2"></div>
+
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-modal">
+            <button class="welcome-close" onclick="closeWelcomePopup()" aria-label="Đóng">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="welcome-icon">Z</div>
+            <span class="welcome-eyebrow">Ưu Đãi Chào Mừng</span>
+            <h3>Tặng Tài Khoản Free Vĩnh Viễn</h3>
+            <p>Tham gia <strong>Group Zalo VIP</strong> ngay hôm nay để nhận chìa khóa API <strong>Down & Research AI</strong> miễn phí và cập nhật ưu đãi sớm nhất từ NINIMAX.</p>
+            <a href="https://zalo.me/g/azmjsw001" target="_blank" class="welcome-cta" onclick="closeWelcomePopup()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Vào Group Zalo Ngay
+            </a>
+            <button class="welcome-skip" onclick="closeWelcomePopup()">Để sau</button>
+        </div>
+    </div>
 
     <nav class="navbar">
         <a onclick="openPage('home-view')" class="brand">
             <div class="brand-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="url(#gold-grad)">
                     <path d="M11.5 1.5C11.5 1.5 12.5 8 18.5 8.5C12.5 9 11.5 15.5 11.5 15.5C11.5 15.5 10.5 9 4.5 8.5C10.5 8 11.5 1.5 11.5 1.5Z"/>
-                    <path d="M9.5 10C9.5 9.1537 10.4258 8.62744 11.1508 9.0536L17.1508 12.583C17.8512 12.9949 17.8512 14.0051 17.1508 14.417L11.1508 17.9464C10.4258 18.3726 9.5 17.8463 9.5 17V10Z" fill="none" stroke="currentColor" stroke-width="1"/>
                     <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z"/>
                 </svg>
             </div>
-            <span class="brand-name">NINIMAX</span>
+            <span class="brand-name">NINI<em>MAX</em></span>
         </a>
-        
+
         <div class="nav-right">
             <a href="https://zalo.me/0876762457" target="_blank" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -392,304 +487,488 @@
             </a>
         </div>
     </nav>
-    
-    <header>
-        <span class="tagline">Hệ sinh thái AI Tự Động</span>
-        <h1>Kỷ nguyên làm video rảnh tay hoàn toàn mới</h1>
-        <p class="subtitle">Loại bỏ hàng giờ chỉnh sửa thủ công mệt mỏi. Trải nghiệm hệ thống AI tự động hóa và bộ công cụ nghiên cứu tối ưu hóa hiệu suất kênh số lượng lớn.</p>
-        
-        <div class="quick-nav">
-            <a href="javascript:void(0)" onclick="openPage('detail-autoclip')" class="nav-btn primary">Smart Cut AI</a>
-            <a href="javascript:void(0)" onclick="openPage('detail-reup')" class="nav-btn secondary">Reup Pro AI</a>
-            <a href="javascript:void(0)" onclick="openPage('detail-research')" class="nav-btn free">Down & Research (Free)</a>
-        </div>
-    </header>
 
-    <main class="container view-section active" id="home-view">
-        <div class="home-grid">
-            <div class="card interactive" style="cursor: pointer; text-align: left;" onclick="openPage('detail-autoclip')">
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f0d9a8" />
+        <stop offset="100%" stop-color="#a8804a" />
+      </linearGradient>
+    </svg>
+
+    <!-- ============ HOME VIEW ============ -->
+    <main class="view-section active" id="home-view">
+
+        <header class="hero">
+            <div class="hero-grid">
+                <div>
+                    <div class="eyebrow-rule"><span class="line"></span><span>Hệ Sinh Thái AI Tự Động</span></div>
+                    <h1 class="hero-title">Rảnh tay vận hành,<br><em>kênh tự nhân bản</em></h1>
+                    <p class="hero-sub">Loại bỏ hàng giờ chỉnh sửa thủ công. Một hệ thống AI cắt ghép, lồng tiếng và phát hiện xu hướng — vận hành kênh nội dung số lượng lớn mà không cần đội ngũ.</p>
+                    <div class="hero-actions">
+                        <a href="javascript:void(0)" onclick="openPage('detail-autoclip')" class="hbtn gold">
+                            Khám Phá Smart Cut AI
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="javascript:void(0)" onclick="openPage('detail-research')" class="hbtn ghost">Dùng Bản Free</a>
+                    </div>
+                    <div class="hero-trustline">
+                        <span class="dot"></span><span>Tin dùng bởi hàng nghìn nhà sáng tạo nội dung tại VN, KR, TQ</span>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hv-frame back-left">
+                        <div class="yt-player" data-id="dB6UHROHExg" style="height:100%;"></div>
+                    </div>
+                    <div class="hv-frame front">
+                        <span class="hv-badge">AI Cắt Tự Động</span>
+                        <div class="yt-player" data-id="jjvmtZbGbIk" style="height:100%;"></div>
+                    </div>
+                    <div class="hv-frame back-right">
+                        <div class="yt-player" data-id="V8NHk3JroOk" style="height:100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="stats-section">
+            <div class="stats-bar">
+                <div class="stat-item"><span class="stat-num">120K+</span><span class="stat-label">Video đã xử lý</span></div>
+                <div class="stat-item"><span class="stat-num">3.400+</span><span class="stat-label">Kênh đang vận hành</span></div>
+                <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">Ngôn ngữ lồng tiếng AI</span></div>
+                <div class="stat-item"><span class="stat-num">99.8%</span><span class="stat-label">Uptime hệ thống Cloud</span></div>
+            </div>
+        </section>
+
+        <section class="collection">
+            <div class="sec-head">
+                <span class="line"></span>
+                <span class="sec-eyebrow">Bộ Công Cụ</span>
+                <h2 class="sec-title">Ba giải pháp, một hệ sinh thái</h2>
+                <p class="sec-desc">Mỗi công cụ giải quyết một công đoạn trong quy trình sản xuất nội dung — chọn điểm bắt đầu phù hợp với kênh của bạn.</p>
+            </div>
+
+            <div class="product-row" onclick="openPage('detail-autoclip')">
+                <span class="product-numeral">I.</span>
+                <div>
+                    <h3 class="product-name">Smart Cut AI</h3>
+                    <p class="product-desc">Công xưởng sản xuất hàng loạt video ngắn chuẩn kịch tính chỉ với 1 click.</p>
+                    <div class="product-tags"><span class="ptag">Viral Score</span><span class="ptag">Auto Subtitle</span><span class="ptag">Face Tracking</span></div>
+                </div>
+                <div class="product-meta">
+                    <span class="prod-status bestseller">Bán chạy nhất</span>
+                    <div class="prod-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+                </div>
+            </div>
+
+            <div class="product-row" onclick="openPage('detail-reup')">
+                <span class="product-numeral">II.</span>
+                <div>
+                    <h3 class="product-name">Reup Pro AI</h3>
+                    <p class="product-desc">Giải pháp toàn diện biến 1 video nội địa thành siêu phẩm phủ sóng đa quốc gia.</p>
+                    <div class="product-tags"><span class="ptag">AI Voice Studio</span><span class="ptag">Smart Blur</span><span class="ptag">OCR 0 Trễ</span></div>
+                </div>
+                <div class="product-meta">
+                    <span class="prod-status licensed">Bản quyền</span>
+                    <div class="prod-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+                </div>
+            </div>
+
+            <div class="product-row" onclick="openPage('detail-research')">
+                <span class="product-numeral">III.</span>
+                <div>
+                    <h3 class="product-name">Down & Research</h3>
+                    <p class="product-desc">Bộ công cụ dò quét data đối thủ, nghiên cứu kênh trending và tải video đa nền tảng miễn phí.</p>
+                    <div class="product-tags"><span class="ptag">Channel Radar</span><span class="ptag">No Watermark</span><span class="ptag">Trend Scan</span></div>
+                </div>
+                <div class="product-meta">
+                    <span class="prod-status free">Miễn phí</span>
+                    <div class="prod-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonial-section">
+            <div class="sec-head center">
+                <span class="line"></span>
+                <span class="sec-eyebrow">Khách Hàng Nói Gì</span>
+                <h2 class="sec-title">Được tin dùng bởi nhà sáng tạo thật</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="t-card">
+                    <div class="t-stars">
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                    </div>
+                    <span class="t-quote-mark">"</span>
+                    <p class="t-text">Từ 1 video dài, hệ thống tự cắt ra cả chục clip ngắn chỉ trong vài phút. Tôi tiết kiệm gần như toàn bộ thời gian edit thủ công trước đây.</p>
+                    <div class="t-footer">
+                        <div class="t-avatar">M</div>
+                        <div><div class="t-name">Minh Tuấn</div><div class="t-role">Chủ kênh Shorts giải trí</div></div>
+                    </div>
+                </div>
+                <div class="t-card">
+                    <div class="t-stars">
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                    </div>
+                    <span class="t-quote-mark">"</span>
+                    <p class="t-text">Reup Pro AI giúp kênh nội địa Trung của tôi lồng tiếng Việt và Hàn tự nhiên, không bị lộ giọng máy. Mảng đa ngôn ngữ giờ không còn là rào cản.</p>
+                    <div class="t-footer">
+                        <div class="t-avatar">H</div>
+                        <div><div class="t-name">Hoài An</div><div class="t-role">MMO đa kênh quốc tế</div></div>
+                    </div>
+                </div>
+                <div class="t-card">
+                    <div class="t-stars">
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6.2 6.7.5-5.1 4.4 1.7 6.5L10 15.1l-5.9 3.5 1.7-6.5L.7 7.7l6.7-.5z"/></svg>
+                    </div>
+                    <span class="t-quote-mark">"</span>
+                    <p class="t-text">Bắt đầu với bản Down & Research miễn phí để nghiên cứu thị trường, sau đó nâng cấp lên Smart Cut AI. Lộ trình rất hợp lý cho người mới.</p>
+                    <div class="t-footer">
+                        <div class="t-avatar">T</div>
+                        <div><div class="t-name">Thảo Vy</div><div class="t-role">Content Creator mới bắt đầu</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing-section">
+            <div class="sec-head center">
+                <span class="line"></span>
+                <span class="sec-eyebrow">So Sánh Gói</span>
+                <h2 class="sec-title">Chọn lộ trình phù hợp với kênh của bạn</h2>
+            </div>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="plan-free">Down & Research<span class="plan-tag">Miễn phí</span></th>
+                        <th>Smart Cut AI<span class="plan-tag">Bán chạy</span></th>
+                        <th class="plan-gold">Reup Pro AI<span class="plan-tag">Full-Option VIP</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Quét & tải video đa nền tảng</td>
+                        <td class="check-yes blue">✓</td>
+                        <td class="check-yes">✓</td>
+                        <td class="check-yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Cắt video ngắn tự động + Viral Score</td>
+                        <td class="check-no">—</td>
+                        <td class="check-yes">✓</td>
+                        <td class="check-yes">✓</td>
+                    </tr>
+                    <tr class="row-highlight">
+                        <td>Lồng tiếng đa ngôn ngữ AI Voice Studio</td>
+                        <td class="check-no">—</td>
+                        <td class="check-no">—</td>
+                        <td class="check-yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Crawler video hàng loạt (Douyin, Kuaishou)</td>
+                        <td class="check-no">—</td>
+                        <td class="check-no">—</td>
+                        <td class="check-yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Hỗ trợ chuyên gia & cập nhật thuật toán</td>
+                        <td class="check-no">—</td>
+                        <td class="check-yes">✓</td>
+                        <td class="check-yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="javascript:void(0)" onclick="openPage('detail-research')" class="hbtn ghost" style="font-size:0.85rem; padding:12px 22px;">Dùng ngay</a></td>
+                        <td><a href="javascript:void(0)" onclick="openPage('detail-autoclip')" class="hbtn gold" style="font-size:0.85rem; padding:12px 22px;">Xem chi tiết</a></td>
+                        <td><a href="javascript:void(0)" onclick="openPage('detail-reup')" class="hbtn gold" style="font-size:0.85rem; padding:12px 22px;">Xem chi tiết</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="final-cta">
+            <div class="final-cta-inner">
+                <h2>Sẵn sàng để kênh <em>tự vận hành?</em></h2>
+                <p>Bắt đầu miễn phí với Down & Research, hoặc liên hệ ngay để được tư vấn gói phù hợp với quy mô kênh của bạn.</p>
+                <div class="final-cta-actions">
+                    <a href="https://zalo.me/0876762457" target="_blank" class="hbtn gold">Nhận Tư Vấn Ngay</a>
+                    <a href="javascript:void(0)" onclick="openPage('detail-research')" class="hbtn ghost">Dùng Bản Free</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ SMART CUT AI DETAIL ============ -->
+    <main class="view-section" id="detail-autoclip">
+        <div class="detail-shell">
+            <a href="javascript:void(0)" class="btn-back" onclick="openPage('home-view')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Trở về trang chủ
+            </a>
+
+            <div class="card" style="margin-top:32px;">
                 <div class="badge">Bán Chạy Nhất</div>
+                <span class="card-eyebrow">I. Sản Xuất Hàng Loạt</span>
                 <h2 class="card-title">Smart Cut AI</h2>
-                <p class="card-subtitle">Công xưởng sản xuất hàng loạt video ngắn chuẩn kịch tính chỉ với 1 click.</p>
-                <div style="margin-top: auto; color: var(--gold-primary); font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                    Xem chi tiết <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </div>
-            </div>
+                <p class="card-subtitle">Giải pháp tạo video ngắn tự động hiệu suất cao cho Creators</p>
 
-            <div class="card interactive" style="cursor: pointer; text-align: left;" onclick="openPage('detail-reup')">
-                <div class="badge">Bản Quyền</div>
+                <div class="video-demo-box">
+                    <p class="demo-title">Video Hướng Dẫn & Demo Smart Cut AI</p>
+                    <div class="video-case">
+                        <div class="video-wrapper video-wrapper-goc" style="max-width: 800px; width: 100%;">
+                            <div class="yt-player" data-id="i-cHSXDP_QQ" style="aspect-ratio: 16/9; margin: 0 auto;">
+                                <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-demo-box">
+                    <p class="demo-title">Demo Phân Tích Thông Minh</p>
+                    <div class="video-case">
+                        <div class="video-wrapper video-wrapper-goc">
+                            <span class="video-label input">Video Nguồn</span>
+                            <div class="yt-player" data-id="kZI1Zkz_4ec" style="aspect-ratio: 16/9; margin: 0 auto;">
+                                <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                            </div>
+                        </div>
+
+                        <button class="action-btn" onclick="processVideo(this)">Bắt Đầu Cắt Tự Động</button>
+
+                        <div class="hidden-outputs" style="flex-direction: column; align-items: center;">
+                            <span class="video-label output" style="margin: 24px 0 0;">Kết Quả Trích Xuất Phân Đoạn</span>
+                            <div class="multi-video-output">
+                                <div class="video-wrapper">
+                                    <div class="yt-player" data-id="jjvmtZbGbIk" style="aspect-ratio: 9/16; border-radius: 12px;">
+                                        <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                    </div>
+                                </div>
+                                <div class="video-wrapper">
+                                    <div class="yt-player" data-id="dB6UHROHExg" style="aspect-ratio: 9/16; border-radius: 12px;">
+                                        <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                    </div>
+                                </div>
+                                <div class="video-wrapper">
+                                    <div class="yt-player" data-id="V8NHk3JroOk" style="aspect-ratio: 9/16; border-radius: 12px;">
+                                        <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="highlight">Nhân bản Siêu Tốc:</span> Biến 1 video dài thành hàng chục clip ngắn 9:16 tối ưu nền tảng dọc.</li>
+                    <li><span class="highlight">Highlight Kịch Tính:</span> AI học sâu tự động phân tích và bắt trọn những đoạn có nội dung hấp dẫn nhất.</li>
+                    <li><span class="highlight">Đánh giá Viral Score:</span> Hệ thống chấm điểm dự đoán xác suất lên xu hướng cho từng clip.</li>
+                    <li><span class="highlight">Phụ đề Động Animation:</span> Tạo chữ chạy hiệu ứng bắt mắt, tăng tỷ lệ giữ chân người xem lên 300%.</li>
+                    <li><span class="highlight">Tracking Khuôn Mặt 3D:</span> Camera AI tự động bám đuổi giữ chủ thể luôn ở trung tâm khung hình.</li>
+                    <li><span class="highlight">Thiết kế cho TikTok Beta:</span> Công cụ hoàn hảo để cày view ngoại, nhận RPM cao cho dân MMO.</li>
+                </ul>
+
+                <div class="bonus-box">
+                    <span class="bonus-icon">✦</span>
+                    <div class="bonus-content">
+                        <h4>Đặc quyền Hỗ trợ Thực chiến</h4>
+                        <p>Khách hàng được cung cấp bộ tài liệu triển khai TikTok Beta chuyên sâu và cập nhật thuật toán liên tục từ chuyên gia.</p>
+                    </div>
+                </div>
+
+                <a href="https://zalo.me/0876762457" target="_blank" class="btn-cta">Nhận Tư Vấn Gói Cao Cấp</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============ REUP PRO AI DETAIL ============ -->
+    <main class="view-section" id="detail-reup">
+        <div class="detail-shell">
+            <a href="javascript:void(0)" class="btn-back" onclick="openPage('home-view')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Trở về trang chủ
+            </a>
+
+            <div class="card" style="margin-top:32px;">
+                <div class="badge">Bản Quyền Độc Tôn</div>
+                <span class="card-eyebrow">II. Địa Phương Hóa Đa Quốc Gia</span>
                 <h2 class="card-title">Reup Pro AI</h2>
-                <p class="card-subtitle">Giải pháp toàn diện biến 1 video nội địa thành siêu phẩm phủ sóng đa quốc gia.</p>
-                <div style="margin-top: auto; color: var(--gold-primary); font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                    Xem chi tiết <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </div>
-            </div>
+                <p class="card-subtitle">Công cụ địa phương hóa nội dung đa nền tảng, không rào cản ngôn ngữ</p>
 
-            <div class="card interactive free-premium home-grid-full" style="cursor: pointer; text-align: left; background: rgba(56, 189, 248, 0.01); border-color: rgba(56, 189, 248, 0.15);" onclick="openPage('detail-research')">
+                <div class="video-demo-box">
+                    <p class="demo-title">Video Hướng Dẫn & Demo Reup Pro AI</p>
+                    <div class="video-case">
+                        <div class="video-wrapper video-wrapper-goc" style="max-width: 800px; width: 100%;">
+                            <div class="yt-player" data-id="W6YeyMNg_-4" style="aspect-ratio: 16/9; margin: 0 auto;">
+                                <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-demo-box">
+                    <p class="demo-title">Trải Nghiệm Lồng Tiếng Chuyên Nghiệp</p>
+                    <div class="video-case">
+                        <div class="video-wrapper video-wrapper-goc">
+                            <span class="video-label input">Video Gốc (Nội Địa Trung)</span>
+                            <div class="yt-player" data-id="fiGyQkfVIgU" style="aspect-ratio: 3/4; max-width: 380px; margin: 0 auto;">
+                                <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                            </div>
+                        </div>
+
+                        <button class="action-btn" onclick="processVideo(this)">Xử Lý Lồng Tiếng Đa Ngôn Ngữ</button>
+
+                        <div class="outputs-wrapper hidden-outputs">
+                            <div class="video-wrapper">
+                                <span class="video-label output">Bản Dịch Tiếng Việt</span>
+                                <div class="yt-player" data-id="qGe88RUhU98" style="aspect-ratio: 3/4; max-width: 380px; margin: 0 auto;">
+                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                </div>
+                            </div>
+                            <div class="video-wrapper">
+                                <span class="video-label output">Bản Dịch Tiếng Hàn</span>
+                                <div class="yt-player" data-id="lQHg2zjeeOo" style="aspect-ratio: 3/4; max-width: 380px; margin: 0 auto;">
+                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="features-list">
+                    <li><span class="highlight">Customization Mạnh Mẽ:</span> Tùy biến toàn diện font chữ, phong cách màu sắc, nền & mix âm lượng chuyên nghiệp.</li>
+                    <li><span class="highlight">100% Automation:</span> Bạn chỉ việc kéo thả video, hệ thống Cloud tự động tính toán và lo liệu mọi quy trình.</li>
+                    <li><span class="highlight">Bóc Tách OCR Độ Trễ 0:</span> Khử tạp âm đỉnh cao và trích xuất phụ đề bằng công nghệ AI Nhận Diện Hình Ảnh tiên tiến.</li>
+                    <li><span class="highlight">Thư viện AI Voice Studio:</span> Giọng đọc bản địa tự nhiên chuẩn phòng thu, đa dạng ngôn ngữ và cảm xúc biểu đạt.</li>
+                    <li><span class="highlight">Render Máy Chủ Lõi Kép:</span> Tốc độ kết xuất video siêu tốc, xử lý hàng loạt giúp tiết kiệm tối đa tài nguyên máy tính.</li>
+                    <li><span class="highlight">Công nghệ Smart Blur:</span> Tính năng độc quyền: tự động làm mờ khi xuất hiện chữ và trả lại hình ảnh gốc siêu thực khi sub biến mất.</li>
+                </ul>
+
+                <div class="bonus-box">
+                    <span class="bonus-icon">✦</span>
+                    <div class="bonus-content">
+                        <h4>Đặc Quyền Full-Option VIP</h4>
+                        <p>Bàn giao toàn bộ quy trình vận hành kênh bài bản và tặng kèm bộ công cụ Crawler lấy video hàng loạt từ Douyin, Kuaishou, Xiaohongshu.</p>
+                    </div>
+                </div>
+
+                <a href="https://zalo.me/0876762457" target="_blank" class="btn-cta">Nhận Tư Vấn Gói Cao Cấp</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============ DOWN & RESEARCH DETAIL ============ -->
+    <main class="view-section" id="detail-research">
+        <div class="detail-shell">
+            <a href="javascript:void(0)" class="btn-back" onclick="openPage('home-view')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Trở về trang chủ
+            </a>
+
+            <div class="card" style="margin-top:32px; border-color: rgba(56,189,248,0.2);">
                 <div class="badge free-badge">Free Access</div>
-                <h2 class="card-title" style="background: var(--blue-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Down & Research AI</h2>
-                <p class="card-subtitle" style="margin-bottom: 24px;">Bộ công cụ dò quét data đối thủ, nghiên cứu kênh trending và tải video đa nền tảng miễn phí.</p>
-                <div style="color: var(--blue-free); font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                    Sử dụng miễn phí ngay <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-        </div>
-    </main>
+                <span class="card-eyebrow" style="color: var(--blue);">III. Nghiên Cứu & Khai Thác</span>
+                <h2 class="card-title" style="background: var(--blue-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NINIMAX Down & Research</h2>
+                <p class="card-subtitle">Hệ thống phân tích thị trường và khai thác tài nguyên số chuyên sâu cho nhà sáng tạo nội dung</p>
 
-    <main class="container view-section" id="detail-autoclip">
-        <div style="width: 100%; max-width: 1000px;">
-            <a href="javascript:void(0)" class="btn-back" onclick="openPage('home-view')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                Trở về trang chủ
-            </a>
-        </div>
-
-        <div class="card">
-            <div class="badge">Bán Chạy Nhất</div>
-            <h2 class="card-title">Smart Cut AI</h2>
-            <p class="card-subtitle">Giải pháp tạo video ngắn tự động hiệu suất cao cho Creators</p>
-
-            <div class="video-demo-box">
-                <p class="demo-title">Video Hướng Dẫn & Demo Smart Cut AI</p>
-                <div class="video-case">
-                    <div class="video-wrapper video-wrapper-goc" style="max-width: 800px; width: 100%;">
-                        <div class="yt-player" data-id="i-cHSXDP_QQ" style="aspect-ratio: 16/9; margin: 0 auto;">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="video-demo-box">
-                <p class="demo-title">Demo Phân Tích Thông Minh</p>
-                <div class="video-case">
-                    <div class="video-wrapper video-wrapper-goc">
-                        <span class="video-label input">Video Nguồn</span>
-                        <div class="yt-player" data-id="kZI1Zkz_4ec" style="aspect-ratio: 16/9; margin: 0 auto;">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        </div>
-                    </div>
-                    
-                    <button class="action-btn" onclick="processVideo(this)">
-                        Bắt Đầu Cắt Tự Động
-                    </button>
-                    
-                    <div class="hidden-outputs" style="flex-direction: column; align-items: center;">
-                        <span class="video-label output" style="margin: 24px 0 0;">Kết Quả Trích Xuất Phân Đoạn</span>
-                        <div class="multi-video-output">
-                            <div class="video-wrapper">
-                                <div class="yt-player" data-id="jjvmtZbGbIk" style="aspect-ratio: 9/16; border-radius: 12px;">
-                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                                </div>
-                            </div>
-                            <div class="video-wrapper">
-                                <div class="yt-player" data-id="dB6UHROHExg" style="aspect-ratio: 9/16; border-radius: 12px;">
-                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                                </div>
-                            </div>
-                            <div class="video-wrapper">
-                                <div class="yt-player" data-id="V8NHk3JroOk" style="aspect-ratio: 9/16; border-radius: 12px;">
-                                    <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <ul class="features-list">
-                <li><span class="highlight">Nhân bản Siêu Tốc:</span> Biến 1 video dài thành hàng chục clip ngắn 9:16 tối ưu nền tảng dọc.</li>
-                <li><span class="highlight">Highlight Kịch Tính:</span> AI học sâu tự động phân tích và bắt trọn những đoạn có nội dung hấp dẫn nhất.</li>
-                <li><span class="highlight">Đánh giá Viral Score:</span> Hệ thống chấm điểm dự đoán xác suất lên xu hướng cho từng clip.</li>
-                <li><span class="highlight">Phụ đề Động Animation:</span> Tạo chữ chạy hiệu ứng bắt mắt, tăng tỷ lệ giữ chân người xem lên 300%.</li>
-                <li><span class="highlight">Tracking Khuôn Mặt 3D:</span> Camera AI tự động bám đuổi giữ chủ thể luôn ở trung tâm khung hình.</li>
-                <li><span class="highlight">Thiết kế cho TikTok Beta:</span> Công cụ hoàn hảo để cày view ngoại, nhận RPM cao cho dân MMO.</li>
-            </ul>
-            
-            <div class="bonus-box">
-                <span class="bonus-icon">✦</span>
-                <div class="bonus-content">
-                    <h4>Đặc quyền Hỗ trợ Thực chiến</h4>
-                    <p>Khách hàng được cung cấp bộ tài liệu triển khai TikTok Beta chuyên sâu và cập nhật thuật toán liên tục từ chuyên gia.</p>
-                </div>
-            </div>
-
-            <a href="https://zalo.me/0876762457" target="_blank" class="btn-cta">Nhận Tư Vấn Gói Cao Cấp</a>
-        </div>
-    </main>
-
-    <main class="container view-section" id="detail-reup">
-        <div style="width: 100%; max-width: 1000px;">
-            <a href="javascript:void(0)" class="btn-back" onclick="openPage('home-view')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                Trở về trang chủ
-            </a>
-        </div>
-
-        <div class="card">
-            <div class="badge">Bản Quyền Độc Tôn</div>
-            <h2 class="card-title">Reup Pro AI</h2>
-            <p class="card-subtitle">Công cụ địa phương hóa nội dung đa nền tảng, không rào cản ngôn ngữ</p>
-
-            <div class="video-demo-box">
-                <p class="demo-title">Video Hướng Dẫn & Demo Reup Pro AI</p>
-                <div class="video-case">
-                    <div class="video-wrapper video-wrapper-goc" style="max-width: 800px; width: 100%;">
-                        <div class="yt-player" data-id="W6YeyMNg_-4" style="aspect-ratio: 16/9; margin: 0 auto;">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="video-demo-box">
-                <p class="demo-title">Trải Nghiệm Lồng Tiếng Chuyên Nghiệp</p>
-                
-                <div class="video-case">
-                    <div class="video-wrapper video-wrapper-goc">
-                        <span class="video-label input">Video Gốc (Nội Địa Trung)</span>
-                        <div class="yt-player" data-id="fiGyQkfVIgU" style="aspect-ratio: 3/4; max-width: 380px; margin: 0 auto;">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        </div>
-                    </div>
-                    
-                    <button class="action-btn" onclick="processVideo(this)">
-                        Xử Lý Lồng Tiếng Đa Ngôn Ngữ
-                    </button>
-                    
-                    <div class="outputs-wrapper hidden-outputs">
-                        <div class="video-wrapper">
-                            <span class="video-label output">Bản Dịch Tiếng Việt</span>
-                            <div class="yt-player" data-id="qGe88RUhU98" style="aspect-ratio: 3/4; max-width: 380px; margin: 0 auto;">
-                                <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                            </div>
-                        </div>
-                        <div class="video-wrapper">
-                            <span class="video-label output">Bản Dịch Tiếng Hàn</span>
-                            <div class="yt-player" data-id="lQHg2zjeeOo" style="aspect-ratio: 3/4; max-width: 380px; margin: 0 auto;">
+                <div class="video-demo-box">
+                    <p class="demo-title">Video Hướng Dẫn & Demo Down & Research AI</p>
+                    <div class="video-case">
+                        <div class="video-wrapper video-wrapper-goc" style="max-width: 800px; width: 100%;">
+                            <div class="yt-player" data-id="pLd-phGia9k" style="aspect-ratio: 16/9; margin: 0 auto;">
                                 <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <ul class="features-list">
-                <li><span class="highlight">Customization Mạnh Mẽ:</span> Tùy biến toàn diện font chữ, phong cách màu sắc, nền & mix âm lượng chuyên nghiệp.</li>
-                <li><span class="highlight">100% Automation:</span> Bạn chỉ việc kéo thả video, hệ thống Cloud tự động tính toán và lo liệu mọi quy trình.</li>
-                <li><span class="highlight">Bóc Tách OCR Độ Trễ 0:</span> Khử tạp âm đỉnh cao và trích xuất phụ đề bằng công nghệ AI Nhận Diện Hình Ảnh tiên tiến.</li>
-                <li><span class="highlight">Thư viện AI Voice Studio:</span> Giọng đọc bản địa tự nhiên chuẩn phòng thu, đa dạng ngôn ngữ và cảm xúc biểu đạt.</li>
-                <li><span class="highlight">Render Máy Chủ Lõi Kép:</span> Tốc độ kết xuất video siêu tốc, xử lý hàng loạt giúp tiết kiệm tối đa tài nguyên máy tính.</li>
-                <li><span class="highlight">Công nghệ Smart Blur:</span> Tính năng độc quyền: tự động làm mờ khi xuất hiện chữ và trả lại hình ảnh gốc siêu thực khi sub biến mất.</li>
-            </ul>
+                <div class="research-grid">
+                    <div class="research-item">
+                        <div class="research-head">
+                            <span class="research-step">01</span>
+                            <div class="research-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg></div>
+                        </div>
+                        <div class="research-info">
+                            <h4>Khai Thác Kênh YouTube</h4>
+                            <p>Tìm kiếm và phân tích toàn bộ hệ thống kênh YouTube theo từ khóa mục tiêu. Hỗ trợ bộ lọc thông minh chuyên sâu theo <strong>Quốc gia</strong> và <strong>Năm thành lập</strong>.</p>
+                        </div>
+                    </div>
 
-            <div class="bonus-box">
-                <span class="bonus-icon">✦</span>
-                <div class="bonus-content">
-                    <h4>Đặc Quyền Full-Option VIP</h4>
-                    <p>Bàn giao toàn bộ quy trình vận hành kênh bài bản và tặng kèm bộ công cụ Crawler lấy video hàng loạt từ Douyin, Kuaishou, Xiaohongshu.</p>
-                </div>
-            </div>
-            
-            <a href="https://zalo.me/0876762457" target="_blank" class="btn-cta">Nhận Tư Vấn Gói Cao Cấp</a>
-        </div>
-    </main>
+                    <div class="research-item">
+                        <div class="research-head">
+                            <span class="research-step">02</span>
+                            <div class="research-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>
+                        </div>
+                        <div class="research-info">
+                            <h4>Quét Video YouTube Cao Cấp</h4>
+                            <p>Truy vết và bóc tách các video tiềm năng theo từ khóa ngách. Định hình xu hướng chính xác nhờ bộ lọc phân loại theo cấu trúc <strong>Quốc gia phát hành</strong> và <strong>Thời gian đăng tải</strong>.</p>
+                        </div>
+                    </div>
 
-    <main class="container view-section" id="detail-research">
-        <div style="width: 100%; max-width: 1000px;">
-            <a href="javascript:void(0)" class="btn-back" onclick="openPage('home-view')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                Trở về trang chủ
-            </a>
-        </div>
+                    <div class="research-item">
+                        <div class="research-head">
+                            <span class="research-step">03</span>
+                            <div class="research-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
+                        </div>
+                        <div class="research-info">
+                            <h4>Radar Kênh Trending Mới</h4>
+                            <p>Hệ thống tự động quét và gọi tên các kênh YouTube đang có tốc độ tăng trưởng đột phá (Trending) real-time phân chia chi tiết theo từng <strong>Quốc gia</strong> và <strong>Chủ đề nội dung</strong>.</p>
+                        </div>
+                    </div>
 
-        <div class="card" style="border-color: rgba(56, 189, 248, 0.2);">
-            <div class="badge free-badge">Free Access</div>
-            <h2 class="card-title" style="background: var(--blue-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NINIMAX Down & Research</h2>
-            <p class="card-subtitle">Hệ thống phân tích thị trường và khai thác tài nguyên số chuyên sâu cho nhà sáng tạo nội dung</p>
-
-            <div class="video-demo-box">
-                <p class="demo-title">Video Hướng Dẫn & Demo Down & Research AI</p>
-                <div class="video-case">
-                    <div class="video-wrapper video-wrapper-goc" style="max-width: 800px; width: 100%;">
-                        <div class="yt-player" data-id="pLd-phGia9k" style="aspect-ratio: 16/9; margin: 0 auto;">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                    <div class="research-item">
+                        <div class="research-head">
+                            <span class="research-step">04</span>
+                            <div class="research-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg></div>
+                        </div>
+                        <div class="research-info">
+                            <h4>Download Đa Nền Tảng Super Speed</h4>
+                            <p>Tải video nguyên bản (High-Quality) không dính watermark từ các mạng xã hội lớn toàn cầu về máy chủ cá nhân cực tốc, làm kho nguyên liệu chuẩn cho quy trình Reup.</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="bonus-box free-bonus">
+                    <span class="bonus-icon blue-text">✦</span>
+                    <div class="bonus-content blue-title">
+                        <h4>Đăng ký tài khoản miễn phí vĩnh viễn</h4>
+                        <p>Công cụ nằm trong chuỗi giải pháp bổ trợ cộng đồng của NINIMAX. Không yêu cầu thẻ tín dụng, đăng ký nhanh qua Zalo để nhận chìa khóa API trải nghiệm ngay hôm nay.</p>
+                    </div>
+                </div>
+
+                <a href="https://zalo.me/g/azmjsw001" target="_blank" class="btn-cta blue-btn">Kích Hoạt Bản Free Tại Group Zalo</a>
             </div>
-            
-            <div class="research-grid">
-                <div class="research-item">
-                    <div class="research-icon">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
-                    </div>
-                    <div class="research-info">
-                        <h4>1. Khai Thác Kênh YouTube</h4>
-                        <p>Tìm kiếm và phân tích toàn bộ hệ thống kênh YouTube theo từ khóa mục tiêu. Hỗ trợ bộ lọc thông minh chuyên sâu theo <strong>Quốc gia</strong> và <strong>Năm thành lập</strong>.</p>
-                    </div>
-                </div>
-
-                <div class="research-item">
-                    <div class="research-icon">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div class="research-info">
-                        <h4>2. Quét Video YouTube Cao Cấp</h4>
-                        <p>Truy vết và bóc tách các video tiềm năng theo từ khóa ngách. Định hình xu hướng chính xác nhờ bộ lọc phân loại theo cấu trúc <strong>Quốc gia phát hành</strong> và <strong>Thời gian đăng tải</strong>.</p>
-                    </div>
-                </div>
-
-                <div class="research-item">
-                    <div class="research-icon">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    </div>
-                    <div class="research-info">
-                        <h4>3. Radar Kênh Trending Mới</h4>
-                        <p>Hệ thống tự động quét và gọi tên các kênh YouTube đang có tốc độ tăng trưởng đột phá (Trending) real-time phân chia chi tiết theo từng <strong>Quốc gia</strong> và <strong>Chủ đề nội dung</strong>.</p>
-                    </div>
-                </div>
-
-                <div class="research-item">
-                    <div class="research-icon">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    </div>
-                    <div class="research-info">
-                        <h4>4. Download Đa Nền Tảng Super Speed</h4>
-                        <p>Tải video nguyên bản (High-Quality) không dính watermark từ các mạng xã hội lớn toàn cầu về máy chủ cá nhân cực tốc, làm kho nguyên liệu chuẩn cho quy trình Reup.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bonus-box free-bonus">
-                <span class="bonus-icon blue-text">✦</span>
-                <div class="bonus-content blue-title">
-                    <h4>Đăng ký tài khoản miễn phí vĩnh viễn</h4>
-                    <p>Công cụ nằm trong chuỗi giải pháp bổ trợ cộng đồng của NINIMAX. Không yêu cầu thẻ tín dụng, đăng ký nhanh qua Zalo để nhận chìa khóa API trải nghiệm ngay hôm nay.</p>
-                </div>
-            </div>
-            
-            <a href="https://zalo.me/g/azmjsw001" target="_blank" class="btn-cta blue-btn">Kích Hoạt Bản Free Tại Group Zalo</a>
         </div>
     </main>
 
     <footer>
-        <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:24px;">
+        <div class="footer-brand">
             <div class="brand-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="url(#gold-grad)">
                     <path d="M11.5 1.5C11.5 1.5 12.5 8 18.5 8.5C12.5 9 11.5 15.5 11.5 15.5C11.5 15.5 10.5 9 4.5 8.5C10.5 8 11.5 1.5 11.5 1.5Z"/>
-                    <path d="M9.5 10C9.5 9.1537 10.4258 8.62744 11.1508 9.0536L17.1508 12.583C17.8512 12.9949 17.8512 14.0051 17.1508 14.417L11.1508 17.9464C10.4258 18.3726 9.5 17.8463 9.5 17V10Z" fill="var(--bg-base)" stroke="url(#gold-grad)" stroke-width="1"/>
                     <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z"/>
                 </svg>
             </div>
-            <span style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); letter-spacing: 0.05em;">NINIMAX</span>
+            <span>NINIMAX</span>
         </div>
-        <p style="font-size: 1rem; max-width: 500px; margin: 0 auto 32px; color: var(--text-muted); line-height: 1.8;">
+        <p style="font-size: 1rem; max-width: 500px; margin: 0 auto 32px; color: var(--ink-soft); line-height: 1.8;">
             Định hình tương lai nội dung số. Giải pháp phủ sóng toàn cầu dễ dàng hơn bao giờ hết.
         </p>
-        
-        <div style="margin-bottom: 40px; font-size: 1rem; color: var(--text-muted); display: inline-flex; background: rgba(255,255,255,0.03); padding: 12px 32px; border-radius: 999px; border: 1px solid var(--border-light);">
-            Hỗ trợ 24/7 &nbsp;|&nbsp; Hotline: <span style="color: var(--gold-primary); font-weight: 700; margin-left: 8px;">0876.762.457</span>
+
+        <div class="footer-hotline">
+            Hỗ trợ 24/7 &nbsp;|&nbsp; Hotline: <span style="color: var(--gold-bright); font-weight: 700; margin-left: 8px;">0876.762.457</span>
         </div>
         <br>
         <a href="https://www.youtube.com/@nini.sharetools" target="_blank" class="yt-footer-btn">
@@ -699,9 +978,9 @@
             Theo dõi chúng tôi trên YouTube
         </a>
 
-        <p style="font-size: 0.9rem; color: #52525b; font-weight: 500;">© 2026 NINIMAX AI Platform. All rights reserved.</p>
+        <p style="font-size: 0.9rem; color: #4a4843; font-weight: 500;">© 2026 NINIMAX AI Platform. All rights reserved.</p>
     </footer>
-    
+
     <a href="https://zalo.me/0876762457" target="_blank" class="floating-action hotline-btn">
         <div class="hotline-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -715,22 +994,34 @@
         <span class="zalo-icon">Z</span> Group Zalo VIP
     </a>
 
-   <script>
+    <script>
+        // === LOGIC POPUP CHÀO MỪNG GROUP ZALO ===
+        function closeWelcomePopup() {
+            const overlay = document.getElementById('welcomeOverlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const overlay = document.getElementById('welcomeOverlay');
+                if (overlay) overlay.classList.add('show');
+            }, 2500);
+        });
+        document.getElementById('welcomeOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeWelcomePopup();
+        });
+
         // === LOGIC CHUYỂN TRANG ===
         function openPage(pageId) {
-            const allViews = document.querySelectorAll('.view-section');
-            allViews.forEach(view => {
-                view.classList.remove('active');
-            });
-
-            // Reset tất cả player về trạng thái ban đầu khi chuyển trang
+            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             document.querySelectorAll('.yt-player.is-playing').forEach(player => {
                 player.classList.remove('is-playing');
-                player.innerHTML = '<div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>'; 
+                const overlay = player.querySelector('.play-overlay');
+                if (!overlay) {
+                    player.innerHTML = '<div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>';
+                }
             });
-
             const targetView = document.getElementById(pageId);
-            if(targetView) {
+            if (targetView) {
                 targetView.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -739,11 +1030,9 @@
         // === LOGIC XỬ LÝ YOUTUBE PLAYER ===
         document.addEventListener('DOMContentLoaded', function() {
             const ytPlayers = document.querySelectorAll('.yt-player');
-
             ytPlayers.forEach(player => {
                 const videoId = player.getAttribute('data-id');
                 player.style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg'), url('https://img.youtube.com/vi/${videoId}/hqdefault.jpg')`;
-
                 player.addEventListener('click', function() {
                     window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
                 });
@@ -752,15 +1041,12 @@
 
         // === LOGIC NÚT XỬ LÝ DEMO ===
         function processVideo(btn) {
-            const originalText = btn.innerHTML;
             btn.innerHTML = '<span class="spinner"></span> Đang hệ thống hóa AI...';
             btn.style.pointerEvents = 'none';
-            
             setTimeout(() => {
                 const caseContainer = btn.closest('.video-case');
                 const outputs = caseContainer.querySelector('.hidden-outputs');
                 outputs.classList.add('active');
-                
                 btn.innerHTML = 'Khởi tạo thành công';
                 btn.classList.add('processed');
             }, 1200);
