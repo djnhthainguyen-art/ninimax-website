@@ -390,6 +390,42 @@
         .hotline-icon { width: 32px; height: 32px; background: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0a0a0a; }
         .hotline-icon svg { width: 16px; height: 16px; }
 
+        /* ============ SOCIAL PROOF TOAST ============ */
+        .proof-toast {
+            position: fixed; bottom: 96px; right: 32px; z-index: 999;
+            display: flex; align-items: center; gap: 13px;
+            background: rgba(13,14,17,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-line); border-radius: 16px;
+            padding: 13px 18px 13px 14px; max-width: 320px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+            opacity: 0; transform: translateY(16px) scale(0.97);
+            pointer-events: none; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+        }
+        .proof-toast.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .proof-toast .proof-avatar {
+            flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+            background: var(--gold-gradient); display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: #0a0a0a; font-size: 0.92rem;
+        }
+        .proof-toast .proof-avatar.free { background: var(--blue-gradient); color: #fff; }
+        .proof-toast .proof-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .proof-toast .proof-line1 { font-size: 0.85rem; color: var(--ink); font-weight: 600; line-height: 1.35; }
+        .proof-toast .proof-line1 strong { color: var(--gold-bright); font-weight: 700; }
+        .proof-toast .proof-line1.free-text strong { color: var(--blue); }
+        .proof-toast .proof-line2 { font-size: 0.74rem; color: var(--ink-faint); display: flex; align-items: center; gap: 6px; }
+        .proof-toast .proof-dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; flex-shrink: 0; animation: proof-pulse 1.6s ease-in-out infinite; }
+        @keyframes proof-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+        .proof-toast .proof-close {
+            flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; margin-left: 2px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            color: var(--ink-faint); transition: all 0.25s var(--ease); background: none; border: none;
+        }
+        .proof-toast .proof-close:hover { background: rgba(255,255,255,0.08); color: var(--ink); }
+        .proof-toast .proof-close svg { width: 12px; height: 12px; }
+        @media (max-width: 600px) {
+            .proof-toast { right: 16px; left: 16px; bottom: 150px; max-width: none; }
+        }
+
         /* ============ WELCOME POPUP ============ */
         .welcome-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(2,2,4,0.8); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
         .welcome-overlay.show { opacity: 1; pointer-events: auto; }
@@ -650,53 +686,7 @@
                 <h2 class="sec-title">Chọn lộ trình phù hợp với kênh của bạn</h2>
             </div>
             <table class="pricing-table">
-              <!--   <thead>
-                    <tr>
-                        <th></th>
-                        <th class="plan-free">Down & Research<span class="plan-tag">Miễn phí</span></th>
-                        <th>Smart Cut AI<span class="plan-tag">Bán chạy</span></th>
-                        <th class="plan-gold">Reup Pro AI<span class="plan-tag">Full-Option VIP</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dò quét Trending toàn cầu & Tải nguyên bản siêu tốc (No-Watermark)</td>
-                        <td class="check-yes blue">✓</td>
-                        <td class="check-yes">✓</td>
-                        <td class="check-yes">✓</td>
-                    </tr>
-                    <tr>
-                        <td>Auto-Cut Highlight: Bám đuổi khuôn mặt (Face Tracking) & Chèn Sub động</td>
-                        <td class="check-no">—</td>
-                        <td class="check-yes">✓</td>
-                        <td class="check-yes">✓</td>
-                    </tr>
-                    <tr class="row-highlight">
-                        <td>Đồng hóa đa quốc gia: Auto Smart Blur tự nhận diện & che khít sub gốc (không lem hình, rảnh tay 100%) + Lồng tiếng AI bản địa</td>
-                        <td class="check-no">—</td>
-                        <td class="check-no">—</td>
-                        <td class="check-yes">✓</td>
-                    </tr>
-                    <tr>
-                        <td>Hệ thống Spy Kênh: Truy vết video chớm xu hướng & Phân tích Top kênh bùng nổ Sub</td>
-                        <td class="check-no">—</td>
-                        <td class="check-no">—</td>
-                        <td class="check-yes">✓</td>
-                    </tr>
-                    <tr>
-                        <td>Chuyển giao thuật toán MMO kín & Support thực chiến 1-1 cùng chuyên gia</td>
-                        <td class="check-no">—</td>
-                        <td class="check-yes">✓</td>
-                        <td class="check-yes">✓</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a href="javascript:void(0)" onclick="openPage('detail-research')" class="hbtn ghost" style="font-size:0.85rem; padding:12px 22px;">Dùng ngay</a></td>
-                        <td><a href="javascript:void(0)" onclick="openPage('detail-autoclip')" class="hbtn gold" style="font-size:0.85rem; padding:12px 22px;">Xem chi tiết</a></td>
-                        <td><a href="javascript:void(0)" onclick="openPage('detail-reup')" class="hbtn gold" style="font-size:0.85rem; padding:12px 22px;">Xem chi tiết</a></td>
-                    </tr>
-                </tbody> -->
-                <thead>
+            <thead>
                 <tr>
                     <th>Hệ Sinh Thái Tính Năng</th>
                     <th class="plan-free">Down & Research<span class="plan-tag">Miễn phí</span></th>
@@ -1027,6 +1017,17 @@
         <p style="font-size: 0.9rem; color: #4a4843; font-weight: 500;">© 2026 NINIMAX AI Platform. All rights reserved.</p>
     </footer>
 
+    <div class="proof-toast" id="proofToast">
+        <div class="proof-avatar" id="proofAvatar">N</div>
+        <div class="proof-body">
+            <span class="proof-line1" id="proofLine1">Đang tải...</span>
+            <span class="proof-line2"><span class="proof-dot"></span><span id="proofLine2">vừa xong</span></span>
+        </div>
+        <button class="proof-close" onclick="hideProofToast()" aria-label="Đóng thông báo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+    </div>
+
     <a href="https://zalo.me/0876762457" target="_blank" class="floating-action hotline-btn">
         <div class="hotline-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1097,6 +1098,75 @@
                 btn.classList.add('processed');
             }, 1200);
         }
+
+        // === LOGIC TOAST SOCIAL PROOF ===
+        (function () {
+            const HO_LIST = ['Văn A', 'Thị B', 'Minh C', 'Thanh D', 'Hoàng E', 'Ngọc F', 'Quang G', 'Thảo H', 'Tuấn K', 'Lan M', 'Đức N', 'Phương P', 'Gia Q', 'Bảo R', 'Khánh S', 'Yến T', 'Trang V', 'Huy X'];
+            const EVENTS = [
+                { type: 'buy', product: 'Smart Cut AI', initial: 'S', avatarClass: '' },
+                { type: 'buy', product: 'Reup Pro AI', initial: 'R', avatarClass: '' },
+                { type: 'free', product: 'Down & Research', initial: 'D', avatarClass: 'free' }
+            ];
+            const TIME_LABELS = ['vừa xong', '1 phút trước', '2 phút trước', '3 phút trước', '5 phút trước', '7 phút trước'];
+
+            let lastTimerId = null;
+
+            function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+            function buildToast() {
+                const ev = pick(EVENTS);
+                const name = pick(HO_LIST);
+                const time = pick(TIME_LABELS);
+                const maskedName = name.charAt(0) + '*** ' + name.slice(-1) + '.';
+
+                const avatar = document.getElementById('proofAvatar');
+                const line1 = document.getElementById('proofLine1');
+                const line2 = document.getElementById('proofLine2');
+
+                avatar.textContent = ev.initial;
+                avatar.className = 'proof-avatar' + (ev.avatarClass ? ' ' + ev.avatarClass : '');
+
+                if (ev.type === 'free') {
+                    line1.className = 'proof-line1 free-text';
+                    line1.innerHTML = `<strong>${maskedName}</strong> vừa kích hoạt <strong>${ev.product}</strong> miễn phí`;
+                } else {
+                    line1.className = 'proof-line1';
+                    line1.innerHTML = `<strong>${maskedName}</strong> vừa mua <strong>${ev.product}</strong>`;
+                }
+                line2.textContent = time;
+            }
+
+            function showProofToast() {
+                buildToast();
+                const toast = document.getElementById('proofToast');
+                toast.classList.add('show');
+                clearTimeout(lastTimerId);
+                lastTimerId = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 5000);
+            }
+
+            window.hideProofToast = function () {
+                const toast = document.getElementById('proofToast');
+                toast.classList.remove('show');
+                clearTimeout(lastTimerId);
+            };
+
+            function scheduleNext() {
+                const delay = 20000 + Math.random() * 15000; // 20–35 giây
+                setTimeout(() => {
+                    showProofToast();
+                    scheduleNext();
+                }, delay);
+            }
+
+            window.addEventListener('load', function () {
+                setTimeout(() => {
+                    showProofToast();
+                    scheduleNext();
+                }, 6000);
+            });
+        })();
     </script>
 </body>
 </html>
