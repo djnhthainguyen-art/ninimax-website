@@ -82,15 +82,50 @@
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-line); z-index: 1000;
         }
-        .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; cursor: pointer; }
-        .brand-icon svg { width: 30px; height: 30px; }
+        .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; cursor: pointer; position: relative; }
+        .brand-icon { position: relative; display: flex; align-items: center; justify-content: center; }
+        .brand-icon::before {
+            content: ''; position: absolute; inset: -10px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,106,0.35) 0%, transparent 70%);
+            filter: blur(6px); opacity: 0.8; animation: brand-glow-pulse 3.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes brand-glow-pulse { 0%,100% { opacity: 0.5; transform: scale(0.92); } 50% { opacity: 1; transform: scale(1.08); } }
+        .brand-icon svg { width: 30px; height: 30px; position: relative; z-index: 1; }
+        .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
         .brand-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em; color: var(--ink); }
         .brand-name em { font-style: normal; color: var(--gold); }
+        .brand-tagline {
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--ink-faint); margin-top: 2px;
+        }
+
+        /* ============ NAV CENTER MENU ============ */
+        .nav-center {
+            display: flex; align-items: center; gap: 6px;
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-line);
+            border-radius: 999px; padding: 6px;
+        }
+        .nav-pill {
+            font-weight: 600; font-size: 0.88rem; text-decoration: none; color: var(--ink-soft);
+            padding: 9px 20px; border-radius: 999px; transition: all 0.3s var(--ease);
+            cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .nav-pill:hover { color: var(--ink); background: rgba(255,255,255,0.05); }
+        .nav-pill.is-free { color: var(--blue); }
+        .nav-pill.is-free:hover { background: rgba(56,189,248,0.1); color: #7dd3fc; }
 
         .nav-right { display: flex; align-items: center; gap: 36px; }
         .nav-link { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 0.92rem; text-decoration: none; color: var(--ink-soft); transition: color 0.3s var(--ease); }
         .nav-link:hover { color: var(--gold); }
         .nav-link svg { width: 17px; height: 17px; fill: currentColor; }
+
+        @media (max-width: 1100px) {
+            .nav-center { display: none; }
+        }
 
         /* ============ VIEW MANAGEMENT ============ */
         .view-section { display: none !important; width: 100%; }
@@ -462,6 +497,7 @@
             h1.hero-title { font-size: 2.6rem; }
             .navbar { padding: 0 20px; height: 70px; }
             .nav-link span { display: none; }
+            .brand-tagline { display: none; }
             .hbtn { width: 100%; justify-content: center; }
             .hero-actions { flex-direction: column; }
             .stats-bar { grid-template-columns: 1fr 1fr; }
@@ -492,7 +528,7 @@
             <div class="welcome-icon">Z</div>
             <span class="welcome-eyebrow">Ưu Đãi Chào Mừng</span>
             <h3>Tặng Tài Khoản Free</h3>
-            <p>Tham gia <strong>Group Zalo VIP</strong> ngay hôm nay để nhận API <strong>Down & Research AI</strong> miễn phí và cập nhật ưu đãi sớm nhất từ NINIMAX.</p>
+            <p>Tham gia <strong>Group Zalo VIP</strong> ngay hôm nay để nhận tool <strong>Down & Research AI</strong> miễn phí và cập nhật ưu đãi sớm nhất từ NINIMAX.</p>
             <a href="https://zalo.me/g/azmjsw001" target="_blank" class="welcome-cta" onclick="closeWelcomePopup()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 Vào Group Zalo Ngay
@@ -509,13 +545,22 @@
                     <path d="M20 16C20 16 20.3 18.2 22 18.5C20.3 18.8 20 21 20 21C20 21 19.7 18.8 18 18.5C19.7 18.2 20 16 20 16Z"/>
                 </svg>
             </div>
-            <span class="brand-name">NINI<em>MAX</em></span>
+            <div class="brand-text">
+                <span class="brand-name">NINI<em>MAX</em></span>
+                <span class="brand-tagline">Auto AI Platform</span>
+            </div>
         </a>
+
+        <div class="nav-center">
+            <a href="javascript:void(0)" class="nav-pill" onclick="openPage('home-view'); setTimeout(function(){ scrollToSection('home-view', '.collection'); }, 60)">Sản phẩm</a>
+            <a href="javascript:void(0)" class="nav-pill" onclick="openPage('home-view'); setTimeout(function(){ scrollToSection('home-view', '.pricing-section'); }, 60)">Tính năng</a>
+            <a href="javascript:void(0)" class="nav-pill is-free" onclick="openPage('detail-research')">Free Tools</a>
+        </div>
 
         <div class="nav-right">
             <a href="https://zalo.me/0876762457" target="_blank" class="nav-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span>0876.762.457</span>
+                <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> -->
+                <!-- <span>0876.762.457</span> -->
             </a>
             <a href="https://www.youtube.com/@nini.sharetools" target="_blank" class="nav-link">
                 <svg viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
@@ -539,7 +584,7 @@
                 <div>
                     <div class="eyebrow-rule"><span class="line"></span><span>Hệ Sinh Thái AI Tự Động</span></div>
                     <h1 class="hero-title">Rảnh tay vận hành,<br><em>kênh tự nhân bản</em></h1>
-                    <p class="hero-sub">Loại bỏ hàng giờ chỉnh sửa thủ công. Một hệ thống AI cắt ghép, lồng tiếng và phát hiện xu hướng — vận hành kênh nội dung số lượng lớn mà không cần đội ngũ.</p>
+                    <p class="hero-sub">Loại bỏ hàng giờ chỉnh sửa thủ công. Một hệ thống AI cắt ghép, lồng tiếng, tự sinh tiêu đề và phát hiện xu hướng — vận hành kênh nội dung số lượng lớn mà không cần đội ngũ.</p>
                     <div class="hero-actions">
                         <a href="javascript:void(0)" onclick="openPage('detail-autoclip')" class="hbtn gold">
                             Khám Phá Smart Cut AI
@@ -1072,6 +1117,14 @@
                 targetView.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        // === LOGIC CUỘN TỚI SECTION TRONG TRANG HOME (dùng cho menu Sản phẩm / Bảng giá) ===
+        function scrollToSection(viewId, selector) {
+            const view = document.getElementById(viewId);
+            if (!view) return;
+            const el = view.querySelector(selector);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // === LOGIC XỬ LÝ YOUTUBE PLAYER ===
